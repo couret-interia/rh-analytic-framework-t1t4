@@ -1,0 +1,57 @@
+\documentclass[11pt,a4paper]{proofarticle}
+\usepackage{graphicx,xcolor,relinput}
+\relinput{.}{authors_cmd}
+\DeclareUnicodeCharacter{2032}{\prime}
+\nocite{*}
+\title{Cadre Analytique Modulaire pour l’Hypothèse de Riemann (T1$′$–T4)\\[2pt]
+\large Preuve-seule, prêt-journal, compatible arXiv}
+\author{\InterIAauthors}
+\date{\today}
+\begin{document}
+
+\relinput{.}{docs/explication-grand-format/latex/page_de_garde_FR}
+
+\maketitle
+
+\section*{Préambule}
+Ce document présente le cadre analytique modulaire (T1$′$–T4) reliant
+la formule explicite de Riemann–Weil, les encadrements spectraux,
+et la lecture interdisciplinaire proposée par le collectif InterIA.
+
+\relinput{.}{appendix/table_des_symboles_FR}
+\addcontentsline{toc}{section}{Sommaire des notations}
+
+% --- section Itinéraires de lecture
+\relinput{.}{docs/explication-grand-format/latex/00_persona_routes_FR}
+
+% --- section Dictionnaire croisé
+\relinput{.}{docs/explication-grand-format/latex/01_translation_dictionary_FR}
+
+% --- section Storyboard T1$′$–T4
+\relinput{.}{docs/explication-grand-format/latex/02_storyboard_t1t4_FR}
+
+% --- section Micro-exemple (T2)
+\relinput{.}{docs/explication-grand-format/latex/03_micro_example_t2_FR}
+
+% --- section T2 — Weighted frame bound (full)
+\relinput{.}{theorems/T2_borne_de_frame_complete_FR} % T2_weighted_frame_full
+
+% --- section T3 — Wave–packet localization (full)
+\relinput{.}{theorems/T3_localisation_paquet_ondes_FR} % T3_wavepacket_full
+
+\appendix
+\relinput{.}{appendix/formule_explicite_archimedienne_FR} % explicit_arch_full
+
+% --- section Passerelles interdisciplinaires
+\relinput{.}{docs/explication-grand-format/latex/04_bridges_boxes_FR}
+
+% --- section FAQ (par spécialité)
+\relinput{.}{docs/explication-grand-format/latex/05_faq_personas_FR}
+
+% --- section* Remerciements
+\relinput{.}{docs/explication-grand-format/latex/remerciements_FR}
+
+\bibliographystyle{alpha}
+\relinput{.}{appendix/about_author_FR}
+\bibliography{refs}
+\end{document}

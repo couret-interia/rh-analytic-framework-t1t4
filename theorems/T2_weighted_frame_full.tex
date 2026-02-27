@@ -1,0 +1,59 @@
+%% theorems/T2_weighted_frame_full.tex
+\section{T2 — Weighted frame bound (full)}
+
+\subsection{Weighted frame bound (T2): full proof}\label{sec:T2-full}
+
+\subsubsection{Statement}
+Let $\phi\in\PW$ be even, $\supp\hat\phi\subset[-A,A]$, $\hat\phi(0)=1$. \\
+Let $\XiA=\{\xi_{p,k}=k\log p\le A\}$ and weights $\wpk=\frac{\log p}{p^{k/2}}$. \\
+Define $\Gpw_{\alpha\beta}=\sqrt{w_\alpha}\,\hat\phi(\xi_\alpha-\xi_\beta)\,\sqrt{w_\beta}$.
+
+\begin{theorem}\label{thm:T2-full}
+There exist $A_0\ge 1$ and $\Thetaw(A)\in(0,1)$ for $A\ge A_0$ such that
+$\lambda_{\min}(\Gpw)\ge 1-\Thetaw(A)=:\Cfrw(A)>0$.
+\end{theorem}
+
+\subsubsection{Schur/Gershgorin}
+Let $R=\Gpw-I$. Schur’s test gives
+\[
+\|R\|_{2\to2}\le\Big(\sup_\alpha\sum_\beta |R_{\alpha\beta}|\Big)^{1/2}
+\Big(\sup_\beta\sum_\alpha |R_{\alpha\beta}|\Big)^{1/2}.
+\]
+Since $R$ is symmetric,
+\[
+\|R\|_{2\to2}\le \Thetaw(A):=\sup_\alpha \sum_{\beta\ne\alpha}\sqrt{w_\alpha w_\beta}\,|\hat\phi(\xi_\alpha-\xi_\beta)|.
+\]
+Hence $\lambda_{\min}(\Gpw)\ge 1-\Thetaw(A)$.
+
+\subsubsection{Locality and summability}
+Fix $\alpha=(p,k)$. Band-limitation implies $\hat\phi(\xi_\alpha-\xi_\beta)=0$ unless $|k\log p-\ell\log q|\le A$.
+Split $\sum_{\beta\ne\alpha}=\sum_{q=p}+\sum_{q\ne p}$.
+
+\paragraph{Same prime $q=p$.}
+Then $|\ell-k|\le \lfloor A/\log p\rfloor$ and
+$\sqrt{w_{p^k}w_{p^\ell}}=(\log p)/p^{(k+\ell)/4}\le (\log p)/p^{k/2}\cdot p^{-(\ell-k)/4}$,
+whence
+\[
+\sum_{\substack{\ell\ne k\\|k-\ell|\le A/\log p}}\sqrt{w_{p^k}w_{p^\ell}}\,|\hat\phi(\xi_{p,k}-\xi_{p,\ell})|
+\ \le\ \frac{C_1}{p^{k/2-1/4}}.
+\]
+
+\paragraph{Different primes $q\ne p$ (refined).}
+Locality forces $q^\ell\in[p^k e^{-A}, p^k e^A]$, so $q\le p^k e^A$ and the number of admissible primes is $\ll p^k e^A/\log(p^k e^A)$ (PNT).
+For each $q$, admissible $\ell$ lie in an interval of length $\ll A/\log q$.
+Using $\sqrt{w_{p^k}w_{q^\ell}}\le \sqrt{\log p\log q}\,p^{-k/4}q^{-\ell/4}$ and $\sum_{q\le X}\frac{\sqrt{\log q}}{q^{1/4}}=O(X^{3/4})$,
+\[
+\sum_{q\ne p}\sum_{\ell\ \text{admissible}} \sqrt{w_{p^k}w_{q^\ell}}\,|\hat\phi(\xi_{p,k}-\xi_{q,\ell})|
+\ \le\ \frac{C_2 A}{p^{k/4}}\,(p^k e^A)^{3/8}
+\ =\ C_3\,A\,p^{k/8}\,e^{3A/8}.
+\]
+Weighted by $w_\alpha=(\log p)/p^{k/2}$ yields $\ll A e^{3A/8}\,p^{-3k/8}$, geometrically small in $k$.
+
+\paragraph{Conclusion.}
+Thus
+\[
+\sum_{\beta\ne\alpha}\sqrt{w_\alpha w_\beta}\,|\hat\phi(\xi_\alpha-\xi_\beta)|
+\ \le\ \frac{C_1}{p^{k/2-1/4}}+\frac{C_3 A e^{3A/8}}{p^{3k/8}},
+\]
+so $\Thetaw(A)<1$ for $A\ge A_0$ and $\lambda_{\min}(\Gpw)\ge 1-\Thetaw(A)>0$.
+\qedhere

@@ -1,0 +1,18 @@
+\begin{tikzpicture}[>=Stealth, node distance=1.6cm, every node/.style={font=\small}]
+  \tikzstyle{box}=[rectangle,draw,rounded corners=3pt,inner sep=5pt]
+  \node[box] (T1) {T1$′$: Explicit + PW + Archimedean};
+  \node[box, below left=of T1] (L2a) {Schur/Gershgorin};
+  \node[box, below=of T1] (L2b) {Local summability (weights)};
+  \node[box, below right=of T1] (L2c) {Taper slope control};
+  \node[box, below=2.2cm of T1] (T2) {T2: Weighted frame gap};
+  \node[box, below left=2.2cm of T2] (L3a) {Wave–packet};
+  \node[box, below=of T2] (L3b) {DCT/Archimedean};
+  \node[box, below right=2.2cm of T2] (L3c) {Prime–side bounds};
+  \node[box, below=2.2cm of L3b] (T3) {T3: Localization/contradiction};
+  \node[box, right=3.7cm of T3] (T4) {T4: HP–compatible reading};
+  \draw[->] (T1) -- (L2a); \draw[->] (T1) -- (L2b); \draw[->] (T1) -- (L2c);
+  \draw[->] (L2a) -- (T2); \draw[->] (L2b) -- (T2); \draw[->] (L2c) -- (T2);
+  \draw[->] (T2) -- (L3a); \draw[->] (T2) -- (L3b); \draw[->] (T2) -- (L3c);
+  \draw[->] (L3a) -- (T3); \draw[->] (L3b) -- (T3); \draw[->] (L3c) -- (T3);
+  \draw[->,dashed] (T2) -- (T4); \draw[->,dashed] (T3) -- (T4);
+\end{tikzpicture}

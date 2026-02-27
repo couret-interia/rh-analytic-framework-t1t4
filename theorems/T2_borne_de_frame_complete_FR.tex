@@ -1,0 +1,49 @@
+%% T2_borne_de_frame_complete_FR.tex
+\section{Borne de frame pondérée (T2) : démonstration complète}
+
+\subsection{Énoncé}
+Soit $\phi\in\PW$ paire, $\supp\widehat{\phi}\subset[-A,A]$, $\widehat{\phi}(0)=1$.
+On définit $\Xi_A=\{\xi_{p,k}=k\log p\le A\}$ et $w_{p,k}=\frac{\log p}{p^{k/2}}$.
+La matrice de Gram pondérée est
+\[
+G^{(w)}_{\alpha\beta}=\sqrt{w_\alpha}\,\widehat{\phi}(\xi_\alpha-\xi_\beta)\,\sqrt{w_\beta}.
+\]
+
+\begin{theorem}
+Il existe $A_0\ge1$ tel que pour $A\ge A_0$, on ait
+\[
+\lambda_{\min}(G^{(w)})\ge1-\Theta_w(A)=:\mathcal{C}^{(w)}_{\mathrm{fr}}(A)>0.
+\]
+\end{theorem}
+
+\subsection{Test de Schur / Gershgorin}
+On note $R=G^{(w)}-I$.
+Schur donne :
+\[
+\|R\|_{2\to2}\le
+\sup_\alpha\sum_\beta|R_{\alpha\beta}|
+=:\Theta_w(A).
+\]
+Ainsi $\lambda_{\min}(G^{(w)})\ge1-\Theta_w(A)$.
+
+\subsection{Localité et sommabilité}
+Fixons $\alpha=(p,k)$.
+Par bande limitée, $\widehat{\phi}(\xi_\alpha-\xi_\beta)=0$ sauf si $|k\log p-\ell\log q|\le A$.
+On sépare deux cas :
+
+\paragraph{Même premier $q=p$.}
+$|\ell-k|\le A/\log p$ et
+$\sqrt{w_{p,k}w_{p,\ell}}=(\log p)/p^{(k+\ell)/4}$.
+Somme géométrique $\Rightarrow$ contribution $\ll(\log p)/p^{k/2}$.
+
+\paragraph{Premiers distincts $q\neq p$.}
+La contrainte $|k\log p-\ell\log q|\le A$ implique $q^\ell\in[p^ke^{-A},p^ke^A]$.
+Le nombre de premiers admissibles est $\ll p^ke^A/\log(p^ke^A)$ (théorème des nombres premiers).
+En sommant sur $\ell$ admissibles, on obtient une borne
+\[
+\sum_{q\neq p}\sum_\ell
+\sqrt{w_{p,k}w_{q,\ell}}\,|\widehat{\phi}(\xi_{p,k}-\xi_{q,\ell})|
+\ll
+A\,e^{3A/8}\,p^{-3k/8}.
+\]
+Ainsi $\Theta_w(A)<1$ pour $A\ge A_0$, donc $\lambda_{\min}(G^{(w)})>0$.

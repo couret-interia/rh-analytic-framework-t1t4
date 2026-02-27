@@ -1,0 +1,18 @@
+{
+  "name": "rh-analytic-framework-t1t4",
+  "version": "v1.0.0",
+  "description": "Proof-only LaTeX source (T1′–T4 framework).",
+  "arxiv": { "primary": "math.NT", "secondary": "math.CA" },
+  "files": [
+    "main_arxiv.tex",
+    "proofarticle.cls",
+    "theorems/T2_weighted_frame_full.tex",
+    "theorems/T3_wavepacket_full.tex",
+    "appendix/explicit_arch_full.tex",
+    "refs.bib"
+  ],
+  "integrity": {
+    "manifest": "MANIFEST_SHA256.txt",
+    "algo": "sha256"
+  }
+}

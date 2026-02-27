@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper]{proofarticle}
+\usepackage{amsmath,amssymb,enumitem,relinput}
+\relinput{.}{authors_cmd}
+\DeclareUnicodeCharacter{2032}{\prime}
+\title{Demonstration note — T1$′$→T4 analytic scheme (non-resolutive)}
+\author{\InterIAauthors}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+\textbf{Caution.} RH is open. This note demonstrates the \emph{analytic scheme} T1$′$–T4:
+(T1$′$) explicit formula (Guinand–Weil), (T2) spectral framing (Gram + Gershgorin/Schur),
+(T3) wave-packet localization, (T4) cross-positivity. We prove \emph{the bounds} and
+\emph{logic} of the scheme; we do not claim to resolve RH.
+\end{abstract}
+
+\section*{Preliminaries}
+Fourier: $\widehat\phi(\xi)=\int_{\mathbb R}\phi(x)e^{-ix\xi}dx$, $\phi(x)=\frac{1}{2\pi}\int_{\mathbb R}\widehat\phi(\xi)e^{ix\xi}d\xi$.
+Let $\PW$ be even, smooth, band-limited functions ($\supp\widehat\phi\subset[-A,A]$).
+
+\section*{\texorpdfstring{T1$′$ — Explicit formula (Guinand–Weil)}{T1′ — Explicit formula (Guinand–Weil)}}
+\[
+\sum_{\rho}\widehat\phi(\gamma_\rho)=\frac{1}{2\pi}\int K(t)\widehat\phi(t)\,dt
+-\sum_{n\ge 1}\frac{\Lambda(n)}{\sqrt n}\big(\phi(\log n)+\phi(-\log n)\big),
+\qquad K(t)=2\log|t|+O(|t|^{-2}).
+\]
+
+\section*{T2 — Spectral framing (Gram + Gershgorin/Schur)}
+Grid $\Xi_A=\{\xi_{p,k}=k\log p\le A\}$, weights $w_{p,k}=\log p/p^{k/2}$, Gram
+$G^{(w)}_{\alpha\beta}=\sqrt{w_\alpha}\,\widehat\phi(\xi_\alpha-\xi_\beta)\,\sqrt{w_\beta}$, $R=G^{(w)}-I$.
+If $S:=\sup_\alpha\sum_{\beta\ne\alpha}|R_{\alpha\beta}|<1$ then $\lambda_{\min}(G^{(w)})\ge 1-S>0$.
+Locality ($|\xi_\alpha-\xi_\beta|\le A$) + $p$-adic decay $\Rightarrow S<1$ for large $A$.
+
+\section*{T3 — Wave-packet localization (contradiction in this scheme)}
+Assume an off-line zero $\rho_0=\beta_0+i\gamma_0$ ($\beta_0\ne\tfrac12$, $0<\gamma_0<A$). Build
+$\widehat\phi_T(\gamma)=\tfrac12\big(b(\sqrt{T}(\gamma-\gamma_0))+b(\sqrt{T}(\gamma+\gamma_0))\big)$, $\|\phi_T\|_2=1$.
+Then: Archimedean term $\to 0$ (DCT); prime-side $\to 0$ (IBP decay, finitely many $\xi_{p,k}\le A$);
+zero-side $\to 1$ (frame capture). Plug into T1$′$ $\Rightarrow$ contradiction (in this framing).
+
+\section*{T4 — Cross-positivity (equality criterion)}
+$K_\phi(\rho,\rho')=\widehat\phi(\gamma-\gamma')$ is positive; so is the prime-side quadratic form.
+Cauchy–Schwarz yields a cross-inequality. Equality for \emph{all} fine tapers forces critical symmetry.
+
+\bigskip
+\noindent\emph{We prove the \textbf{scheme} and its key bounds; we do not claim to settle RH.}
+\end{document}

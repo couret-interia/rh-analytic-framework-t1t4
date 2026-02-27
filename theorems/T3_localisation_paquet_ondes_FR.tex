@@ -1,0 +1,39 @@
+%% T3_localisation_paquet_ondes_FR.tex
+\section{Localisation par paquets d’ondes (T3) : démonstration complète}
+
+On suppose T2 établie et la formule explicite connue.
+
+\subsection{Construction du paquet}
+Soit $b\in C_c^\infty([-1,1])$, paire, $\int b=1$.
+Pour $T\ge1$, posons :
+\[
+\widehat{\phi}_T(\gamma)
+=\tfrac12\big(b(\sqrt{T}(\gamma-\gamma_0))+b(\sqrt{T}(\gamma+\gamma_0))\big).
+\]
+Alors $\widehat{\phi}_T$ est concentrée près de $\pm\gamma_0$ avec largeur $\sim T^{-1/2}$, et $\|\phi_T\|_2=1$.
+
+\subsection{Terme archimédien \texorpdfstring{$\to0$}{to0}}
+On a $K(t)=2\log|t|+O(|t|^{-2})$.
+La convergence dominée (fonction majorante intégrable $h$) assure
+\[
+\frac{1}{2\pi}\int K(t)\widehat{\phi}_T(t)\,dt\to0.
+\]
+
+\subsection{Côté premiers \texorpdfstring{$\to0$}{to0}}
+Par intégrations par parties, pour tout $M\ge1$ il existe $C_M$ tel que
+\[
+|\phi_T(x)|\le C_M\,T^{(M-1)/2}(1+|x|)^{-M}.
+\]
+Le nombre de $\xi_{p,k}\le A$ est fini, donc
+\[
+\sum_{p,k}\frac{\log p}{p^{k/2}}\,|\phi_T(\xi_{p,k})|\to0.
+\]
+
+\subsection{Contradiction dans le schéma}
+En insérant dans la formule explicite,
+\[
+\sum_{\rho}\widehat{\phi}_T(\gamma_\rho)
+=\frac{1}{2\pi}\int K\,\widehat{\phi}_T
++\sum_{p,k}\frac{\log p}{p^{k/2}}\phi_T(\xi_{p,k}).
+\]
+Le membre gauche $\to1$ (capture de masse), le droit $\to0$ : contradiction si un zéro $\rho_0$ est hors ligne.

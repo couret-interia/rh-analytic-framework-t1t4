@@ -1,0 +1,18 @@
+% audits/memo/audit_lambda_couret_glc_tikz_1st_plots_memo.tex
+% Status: MEMO / HISTORICAL — not part of the final paper or arXiv tarball.
+% Re-enable with: pdflatex "\def\GUE_LAMBDA_MEMO{} \input{..._memo.tex}"
+
+\unless\ifdefined\GUE_LAMBDA_MEMO
+  \expandafter\endinput
+\fi
+
+% --- original code below ---
+% GUE (beta=2)
+\addplot[very thick,blue] {(32/pi^2)*x^2*exp(-4*x^2/pi)};
+\addlegendentry{GUE ($\beta=2$)}
+% GUE-lambda (beta=2+0.378)
+\addplot[very thick,red,dashed]
+( { ( (gamma((2+0.378+1)/2) / gamma((2+0.378+2)/2) )^2 )^( (2+0.378+1)/2 ) * 2 / gamma((2+0.378+1)/2) } )
+* x^(2+0.378)
+* exp( - ( (gamma((2+0.378+1)/2) / gamma((2+0.378+2)/2) )^2 ) * x^2 );
+\addlegendentry{GUE-$\lambda$ ($\beta\approx2{,}378$)}

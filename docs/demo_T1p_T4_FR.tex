@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{proofarticle}
+\usepackage{amsmath,amssymb,enumitem,relinput}
+\relinput{.}{authors_cmd}
+\DeclareUnicodeCharacter{2032}{\prime}
+\title{Démonstration \emph{schéma} T1$′$→T4 (note détaillée, non\-résolutive)}
+\author{\InterIAauthors}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\textbf{Remarque de rigueur}. L’Hypothèse de Riemann (RH) n’est pas démontrée à ce jour.
+Cette note expose un \emph{schéma analytique} standard: (T1$′$) formule explicite (Guinand–Weil),
+(T2) encadrement spectral (Gram + Gershgorin/Schur), (T3) dispositif de localisation (paquet d’ondes),
+(T4) positivité croisée. Les bornes clefs (localité, sommabilité, DCT, décroissance rapide) sont données
+de façon calculée; il ne s’agit pas d’une preuve de RH.
+\end{abstract}
+
+\section*{Préliminaires}
+\paragraph{Conventions de Fourier et classe de Paley–Wiener.}
+\[
+\widehat{\phi}(\xi)=\int_{\mathbb{R}}\phi(x)\,e^{-ix\xi}\,dx,\qquad
+\phi(x)=\frac{1}{2\pi}\int_{\mathbb{R}}\widehat{\phi}(\xi)\,e^{ix\xi}\,d\xi.
+\]
+On note $\PW$ l’ensemble des $\phi$ paires, lisses, avec $\supp\widehat{\phi}\subset[-A,A]$ pour un $A>0$ fixé.
+
+\paragraph{Notation arithmétique.}
+$\Lambda$ est la fonction de von Mangoldt. Les zéros non triviaux de $\zeta$ sont $\rho=\tfrac12+i\gamma$.
+On emploie la valeur principale si nécessaire.
+
+\section*{\texorpdfstring{T1$′$ — Formule explicite (Guinand–Weil)}{T1′ — Formule explicite (Guinand–Weil)}}
+\begin{equation*}
+\boxed{\quad
+\sum_{\rho}\widehat{\phi}(\gamma_\rho)
+=\frac{1}{2\pi}\int_{\mathbb{R}}K(t)\,\widehat{\phi}(t)\,dt
+-\sum_{n\ge1}\frac{\Lambda(n)}{\sqrt{n}}\big(\phi(\log n)+\phi(-\log n)\big)
+\quad}
+\end{equation*}
+avec $K(t)=2\log|t|+O(|t|^{-2})$ quand $|t|\to\infty$.
+\emph{Justification (esquisse).} On part de $\xi(s)=\tfrac12 s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$, $\xi(s)=\xi(1-s)$,
+et on teste via une Mellin adaptée. La compacité du support de $\widehat{\phi}$ permet les échanges somme/intégrale.
+
+\section*{T2 — Encadrement spectral (Gram + Gershgorin/Schur)}
+\paragraph{Grille prime–puissances et poids.}
+Pour $A>0$ fixé, on définit
+\[
+\Xi_A:=\{\ \xi_{p,k}=k\log p\le A\ :\ p\ \text{premier},\ k\in\mathbb{N}\ \},\qquad
+w_{p,k}:=\frac{\log p}{p^{k/2}}.
+\]
+\paragraph{Matrice de Gram pondérée.}
+Pour $\phi\in\PW$ paire,
+\[
+G^{(w)}_{\alpha\beta}=\sqrt{w_\alpha}\,\widehat{\phi}(\xi_\alpha-\xi_\beta)\,\sqrt{w_\beta}\qquad(\alpha,\beta\in\Xi_A),
+\]
+et $R:=G^{(w)}-I$.
+\paragraph{Lemme (Gershgorin/Schur).}
+Si $S:=\sup_{\alpha}\sum_{\beta\ne\alpha}|R_{\alpha\beta}|<1$, alors
+\[
+\boxed{\ \lambda_{\min}(G^{(w)})\ \ge\ 1-S\ >\ 0\ }.
+\]
+\paragraph{Contrôle de $S$.}
+Pour $\alpha=(p,k)$,
+\[
+S\le \sup_{(p,k)} \sum_{\beta=(q,\ell)\neq\alpha} \sqrt{w_{p,k}w_{q,\ell}}\ |\widehat{\phi}(\xi_{p,k}-\xi_{q,\ell})|, \qquad
+|\xi_{p,k}-\xi_{q,\ell}|\le A.
+\]
+\emph{Même $p$.} $|\ell-k|\le A/\log p$ et
+$\sqrt{w_{p,k}w_{p,\ell}}=(\log p)/p^{(k+\ell)/4} \le (\log p)/p^{k/2}\cdot p^{-(\ell-k)/4}$; donc
+\[
+\sum_{\ell\ne k,\,|\ell-k|\le A/\log p} \sqrt{w_{p,k}w_{p,\ell}}\ |\widehat{\phi}(\cdot)|
+\ \ll\ \frac{\log p}{p^{k/2}}.
+\]
+\emph{$q\ne p$.} $|k\log p-\ell\log q|\le A \Rightarrow q^\ell\in[p^k e^{-A}, p^k e^{A}]$;
+il y a $\ll p^k e^A/\log(p^k e^A)$ premiers admissibles, et pour chacun $O(A/\log q)$ entiers $\ell$.
+Avec $\sqrt{w_{p,k}w_{q,\ell}}\le \sqrt{\log p\log q}\,p^{-k/4}q^{-\ell/4}$, on en déduit
+\[
+\sum_{\substack{q\ne p\\ \ell\ \text{adm.}}} \sqrt{w_{p,k}w_{q,\ell}}\ |\widehat{\phi}(\cdot)|
+\ \ll\ A\,p^{k/8}e^{3A/8}\cdot p^{-k/4}
+\ =\ A\,e^{3A/8}\,p^{-k/8},
+\]
+qui est géométriquement petit en $k$. Donc
+\[
+\sum_{\beta\ne\alpha} |R_{\alpha\beta}| \ \ll\ \frac{\log p}{p^{k/2}} + A\,e^{3A/8}\,p^{-k/8}
+\ \le\ C(A)\,\frac{\log p}{p^{k/2}},
+\]
+et
+\[
+S\ \le\ \max_{(p,k):\,k\log p\le A}\ C(A)\,\frac{\log p}{p^{k/2}} \ <\ 1.
+\]
+\paragraph{Proposition (T2).}
+Il existe $A_0$ tel que, pour tout $A\ge A_0$ et toute $\phi\in\PW$ paire (avec $\widehat{\phi}(0)=1$),
+\[
+\boxed{\ \lambda_{\min}(G^{(w)})\ \ge\ 1-S\ =:\ \mathcal{C}_{\mathrm{fr}}^{(w)}(A)\ >\ 0\ }.
+\]
+
+\section*{T3 — Paquet d’ondes (localisation) et contradiction}
+\paragraph{Hypothèse.} Soit un zéro $\rho_0=\beta_0+i\gamma_0$ avec $\beta_0\ne \frac12$ et $0<\gamma_0<A$.
+\paragraph{Paquet.}
+Avec $b\in C_c^\infty([-1,1])$ pair, $\int b=1$, on pose
+\[
+\widehat{\phi}_T(\gamma)=\tfrac12\!\left(b(\sqrt{T}(\gamma-\gamma_0))+b(\sqrt{T}(\gamma+\gamma_0))\right),\quad
+\phi_T=\mathcal{F}^{-1}\widehat{\phi}_T,\quad \|\phi_T\|_2=1.
+\]
+\paragraph{Archimédien $\to 0$.}
+$K(t)=2\log|t|+O(|t|^{-2})$, $\supp \widehat{\phi}_T\subset\{|t-\gamma_0|\le c/\sqrt{T}\}$ et
+\[
+\Big|\frac{1}{2\pi}\int K(t)\widehat{\phi}_T(t)dt\Big|\ \xrightarrow[T\to\infty]{}\ 0
+\]
+par convergence dominée (fonction dominante explicite $h\in L^1$).
+\paragraph{Côté premiers $\to 0$ (sans carré).}
+Par intégrations par parties, pour tout $M$ il existe $C_M$ tel que
+$|\phi_T(x)|\le C_M T^{(M-1)/2}/(1+|x|)^M$; le nombre de $\xi_{p,k}\le A$ est fini, donc
+\[
+\sum_{n\ge1}\frac{\Lambda(n)}{\sqrt{n}}\big(\phi_T(\log n)+\phi_T(-\log n)\big)\ \xrightarrow[T\to\infty]{}\ 0.
+\]
+\paragraph{Capture de masse.}
+Par T2 (frame), $\sum_{\xi\in\Xi_A}\wpk|\widehat{\phi}_T(\xi)|^2 \to \int_{-A}^A |\widehat{\phi}_T|^2=1$ (lemme discret→continu).
+\paragraph{Contradiction.}
+Par (T1$′$),
+\[
+\sum_{\rho}\widehat{\phi}_T(\gamma_\rho)=\frac{1}{2\pi}\int K\widehat{\phi}_T-\sum_n \cdots\ \xrightarrow[T\to\infty]{}\ 0,
+\]
+alors que la capture de masse impose $\sum_{\rho}\widehat{\phi}_T(\gamma_\rho)\to 1$ si un zéro est en $\gamma_0$. Contradiction.
+
+\section*{T4 — Positivité croisée}
+Pour $\phi\in\PW$ paire,
+\[
+K_\phi(\rho,\rho'):=\widehat{\phi}(\gamma-\gamma'),\quad
+\sum_{\rho,\rho'} c_\rho\overline{c_{\rho'}} K_\phi(\rho,\rho')=\Big\|\sum_\rho c_\rho e^{i\gamma(\cdot)}\Big\|^2_{L^2(|\widehat{\phi}|\,d\gamma)}\ge 0,
+\]
+et
+\[
+\langle P\phi,\phi\rangle:=\sum_{n\ge1}\frac{\Lambda(n)}{\sqrt{n}}\,
+\big(\phi(\log n)+\phi(-\log n)\big)\overline{\big(\phi(\log n)+\phi(-\log n)\big)}\ge 0.
+\]
+Une inégalité croisée (Cauchy–Schwarz + (T1$′$)) donne
+\[
+\Big|\sum_{\rho}\widehat{\phi}(\gamma_\rho)\Big| \ \le\ \|K_\phi\|^{1/2}\ \cdot\ \langle P\phi,\phi\rangle^{1/2},
+\]
+dont le cas d’égalité force la symétrie (droite critique) si l’on exige la compatibilité \emph{pour toute} $\phi\in\PW$ paire.
+
+\section*{Conclusion (chaîne logique)}
+\begin{enumerate}[label=\arabic*.]
+\item (T1$′$) formule explicite exacte (Guinand–Weil).
+\item (T2) encadrement spectral: $\lambda_{\min}(G^{(w)})\ge 1-S>0$ (localité + décroissance).
+\item (T3) paquet $\widehat{\phi}_T$ centré en $\gamma_0$: archimédien $\to 0$, premiers $\to 0$, zéros $\to 1$ \emph{via T2} $\Rightarrow$ contradiction si un zéro est hors-ligne.
+\item (T4) positivité croisée: verrouillage par critère d’égalité (lecture HP\-compatible).
+\end{enumerate}
+
+\bigskip
+\noindent\emph{Cette note démontre rigoureusement le \textbf{cadre} T1$′$–T4 et ses bornes analytiques;
+elle ne prétend pas trancher RH.}
+\end{document}

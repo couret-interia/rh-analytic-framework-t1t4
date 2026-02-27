@@ -1,0 +1,83 @@
+name: build-pdf
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-fonts-extra \
+            texlive-lang-french texlive-science \
+            latexmk biber poppler-utils
+      - name: Build audit λ(Couret) FR/EN
+        run: make all-audit
+      - name: Upload audit PDFs + manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-lambda-couret_FR_EN
+          path: |
+            audits/audit_lambda_couret_FR.pdf
+            audits/audit_lambda_couret_EN.pdf
+            audits/audit_lambda_couret_light_FR.pdf
+            audits/audit_lambda_couret_light_EN.pdf
+            audits/audit_lambda_couret_glc_graph_standalone_FR.pdf
+            audits/audit_lambda_couret_glc_graph_standalone_EN.png
+            audits/audit_lambda_couret_glc_graph_dark_FR.pdf
+            audits/audit_lambda_couret_glc_graph_dark_EN.png
+            audits/audit_lambda_couret_glc_graph_standalone_FR.pdf
+            audits/audit_lambda_couret_glc_graph_standalone_EN.png
+            audits/audit_lambda_couret_glc_graph_dark_FR.pdf
+            audits/audit_lambda_couret_glc_graph_dark_EN.png
+            audits/MANIFEST_SHA256.txt
+          retention-days: 30
+      - name: Build dep graph
+        run: make dep-graph-pdf
+      - name: Build journal PDF (BibTeX)
+        run: make journal-pdf
+      - name: Build journal PDF FR (BibTeX)
+        run: make journal-pdf-fr
+      - name: Build guide PDF
+        run: make guide-pdf
+      - name: Build guide Beamer
+        run: make guide-beamer
+      - name: Build all demos T1'→T4 (FR & EN)
+        run: make all-demo
+      - name: Build all graphe_dependances (pdf & png)
+        run: make all-graph
+      - name: Upload all docs guide & demos (FR & EN) + graphes
+        uses: actions/upload-artifact@v4
+        with:
+          name: All-docs-Riemann-Hypothesis-T1p-T4_interIA
+          path: |
+            docs/demo_T1p_T4_FR.pdf
+            docs/demo_T1p_T4_EN.pdf
+            docs/demo_T1p_T4_beamer_FR.pdf
+            docs/demo_T1p_T4_beamer_EN.pdf
+            docs/demonstration_finale_RH_FR.pdf
+            docs/demonstration_finale_RH_EN.pdf
+            docs/guide_interdisciplinaire.pdf
+            docs/guide_interdisciplinaire_beamer.pdf
+            docs/explication-grand-format/latex/graphe_dependances_standalone.pdf
+            docs/explication-grand-format/latex/graphe_dependances_dark.pdf
+            docs/explication-grand-format/latex/graphe_dependances_standalone.png
+            docs/explication-grand-format/latex/graphe_dependances_dark.png
+          retention-days: 30
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: src-main_journal-pdf
+          path: src/main_journal.pdf
+      - name: Build arXiv tarball
+        run: make arxiv
+      - name: Upload arXiv tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: arxiv-package
+          path: |
+            dist/arxiv_package.tar.gz
+            dist/arxiv_package.tar.gz.sha256
+          retention-days: 30

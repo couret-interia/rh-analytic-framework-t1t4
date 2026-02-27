@@ -1,0 +1,18 @@
+%% appendix/explicit_arch_full.tex
+\section{Guinand–Weil explicit formula}\label{sec:GW-full}
+For $\phi\in\PW$ even, smooth, band-limited, contour-shift and residues for the completed $\xi$–function yield
+\[
+\sum_{\rho}\hat\phi(\gamma_\rho)
+=\int K(t)\,\hat\phi(t)\,\frac{dt}{2\pi}
++\sum_{p,k\ge 1}\frac{\log p}{p^{k/2}}\phi(k\log p),
+\]
+with $K(t)=\psi(\tfrac14+\tfrac{it}{2})+\psi(\tfrac14-\tfrac{it}{2})-2\psi(\tfrac14)$ and $\psi=\Gamma'/\Gamma$.
+
+\section{Archimedean control (IBP)}
+Using $\psi(\tfrac14\pm \tfrac{it}{2})=\log|t|+O(|t|^{-2})$ uniformly and a $\cos^2$ taper with plateau+transition,
+two integrations by parts on the boundary layer give
+\[
+|A(\phi)|\ \le\ \frac{C}{A^2}\,\|\hat\phi\|_1.
+\]
+\section{Absorption lemma}
+If $a\le \eta a + b$ with $\eta\in(0,1)$, then $a\le b/(1-\eta)$.

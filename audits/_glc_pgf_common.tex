@@ -1,0 +1,18 @@
+% PGFPLOTS stable Γ/lnΓ + Pβ(s)
+\pgfplotsset{compat=1.18}
+\pgfmathsetmacro{\lam}{0.378}    % ou 1/sqrt(7)
+\pgfmathsetmacro{\bet}{2}        % base GUE
+\pgfmathsetmacro{\LNTWOPIHALF}{0.9189385332046727} % ln(sqrt(2π))
+
+\pgfmathdeclarefunction{lngamma}{1}{%
+  \pgfmathparse{(#1-0.5)*ln(#1) - #1 + \LNTWOPIHALF + 1/(12*(#1)) - 1/(360*(#1)^3) + 1/(1260*(#1)^5)}%
+}
+\pgfmathdeclarefunction{gamma}{1}{\pgfmathparse{exp(lngamma(#1))}}
+
+% ln b = 2( lnΓ((β+2)/2) - lnΓ((β+1)/2) )
+\pgfmathdeclarefunction{lnb}{1}{\pgfmathparse{2*(lngamma((#1+2)/2) - lngamma((#1+1)/2))}}
+\pgfmathdeclarefunction{bb}{1}{\pgfmathparse{exp(lnb(#1))}}
+\pgfmathdeclarefunction{aa}{1}{\pgfmathparse{2*exp(((#1+1)/2)*lnb(#1) - lngamma((#1+1)/2))}}
+
+% Pβ(s) = a s^β exp(-b s^2)
+\pgfmathdeclarefunction{Pbeta}{2}{\pgfmathparse{ aa(#1) * ((#2)^(#1)) * exp(-bb(#1)*(#2)^2)}}

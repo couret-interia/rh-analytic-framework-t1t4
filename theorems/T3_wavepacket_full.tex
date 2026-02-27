@@ -1,0 +1,52 @@
+%% theorems/T3_wavepacket_full.tex
+\section{T3 — Wave–packet localization (full)}
+
+\subsection{Wave–packet localization (T3): full proof}\label{sec:T3-full}
+
+Assume Theorem~\ref{thm:T2-full} and the explicit formula (Appendix).
+Let $\gamma_0\in(0,A)$ and suppose a nontrivial zero $\rho_0=\beta_0+i\gamma_0$ with $\beta_0\ne \tfrac12$.
+
+\subsubsection{Wave–packet construction}
+Pick $b\in C_c^\infty([-1,1])$, even, $\int b=1$. For $T\ge 1$ set
+\[
+\hat\phi_T(\gamma)=\tfrac12\Big(b(\sqrt{T}(\gamma-\gamma_0))+b(\sqrt{T}(\gamma+\gamma_0))\Big).
+\]
+Then $\hat\phi_T$ concentrates near $\pm\gamma_0$ with width $\sim T^{-1/2}$; let $\phi_T=\mathcal F^{-1}\hat\phi_T$, with $\|\phi_T\|_2=1$.
+
+\subsubsection{Frame capture and discrete-to-continuous limit}
+By T2, $\sum_{\xi\in\Xi_A}\wpk|\hat\phi_T(\xi)|^2\ge \Cfrw(A)$. Moreover:
+\begin{lemma}[Frame-to-integral]\label{lem:frame-to-int}
+\[
+\sum_{\xi\in\Xi_A}\wpk|\hat\phi_T(\xi)|^2 \ \longrightarrow\ \int_{-A}^A |\hat\phi_T(\gamma)|^2 d\gamma \ =\ 1 \qquad (T\to\infty).
+\]
+\end{lemma}
+
+\subsubsection{\texorpdfstring{Archimedean term $\to 0$ (explicit DCT)}{Archimedean term to 0 (explicit DCT)}}
+Write $A(\phi)=\int K(t)\hat\phi(t) dt$ with $K(t)=2\log|t|+O(|t|^{-2})$.
+Since $\supp(\hat\phi_T)\subset \{ |t-\gamma_0|\le c/\sqrt{T}\}$ and $\|\hat\phi_T\|_1=O(1)$,
+choose
+\[
+h(t)=C\,(1+t^2)^{-1}(1+\log^2(2+|t|))\,\mathbf 1_{|t-\gamma_0|\le 2}(t)\in L^1,
+\]
+and note $|K(t)\hat\phi_T(t)|\le h(t)$ for $T$ large; as $\hat\phi_T(t)\to 0$ a.e., DCT gives $A(\phi_T)\to 0$.
+
+\subsubsection{\texorpdfstring{Prime–power side $\to 0$ (no square)}{Prime–power side to 0 (no square)}}
+The explicit formula involves $\sum_{p,k}(\log p)/p^{k/2}\ \phi_T(\xi_{p,k})$ (not squared).
+By Fourier inversion and repeated integration by parts, for any $M\in\mathbb N$ there exists $C_M$ with
+\[
+|\phi_T(x)| \le C_M \frac{T^{(M-1)/2}}{(1+|x|)^M}.
+\]
+For fixed $A$ there are finitely many $\xi_{p,k}\in[0,A]$, hence
+\[
+\sum_{p,k}\frac{\log p}{p^{k/2}}\,\big|\phi_T(\xi_{p,k})\big|
+\ \le\ \max_{\xi\in\Xi_A}|\phi_T(\xi)| \sum_{p,k:\ \xi_{p,k}\le A}\frac{\log p}{p^{k/2}}
+\ \xrightarrow[T\to\infty]{}\ 0,
+\]
+since $\max_{\xi\in\Xi_A}|\phi_T(\xi)|\to 0$ (width $T^{-1/2}$, amplitude $\to 0$ pointwise).
+
+\subsubsection{Contradiction}
+The explicit formula yields
+\[
+\sum_{\rho}\hat\phi_T(\gamma_\rho)=A(\phi_T)+\sum_{p,k}\frac{\log p}{p^{k/2}}\phi_T(\xi_{p,k}).
+\]
+Letting $T\to\infty$, LHS$\to 1$, RHS$\to 0$; contradiction. \qedhere

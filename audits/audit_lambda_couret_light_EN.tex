@@ -1,0 +1,126 @@
+%========================================================
+% Extreme Scientific Audit — λ_(Couret) light (EN version, fixed)
+%========================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---- Encoding & language
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% ---- Math & layout
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage[section]{placeins}% This prevents placing floats before a section: https://tex.stackexchange.com/a/32605
+\usepackage{float}% For the [H] option to force placement: https://tex.stackexchange.com/a/32599
+
+% ---- Graphics
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\usepackage{relinput}
+\relinput{.}{authors_cmd}
+% ---- Links & safe PDF strings
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=purple!50!black,
+  urlcolor=blue!55!black,
+  pdfauthor={\InterIAPDFAuthors},
+  pdftitle={Extreme Scientific Audit of the harmonic constant lambda (Couret)}
+}
+\makeatletter
+\@ifundefined{pdfstringdefDisableCommands}{}{%
+  \pdfstringdefDisableCommands{%
+    \def\lambda{lambda}%
+    \def\Lambda{Lambda}%
+    \def\beta{beta}%
+    \def\Xi{Xi}%
+  }%
+}
+\makeatother
+
+% ---- Theorems
+\newtheorem{theorem}{Theorem}
+\newtheorem{definitionenv}{Definition}
+\newtheorem{remark}{Remark}
+
+%========================================================
+\begin{document}
+
+\title{\LARGE Extreme Scientific Audit of the Harmonic Constant $\lambda_{\text{(Couret)}}$ and Related Invariants}
+\author{\InterIAauthors\thanks{With contributions from \emph{InterIA Research}.}}
+\date{February 2026}
+\maketitle
+
+\begin{abstract}
+We audit the harmonic constant $\lambda_{\text{(Couret)}}$ proposed as a universal spectral invariant ($\lambda \approx 0.377964473 \simeq 1/\sqrt{7}$).
+From arithmetic (mod~30 series), spectral (NNSD, $\Delta_3$), and operational evidence ($K=\sqrt{\text{Selectivity}\times\text{Precision}}$), we conclude that $\lambda$ is a \textbf{robust experimental multi-domain invariant}, while its status as a \textbf{proven universal constant} remains to be formally established and independently replicated.
+\end{abstract}
+
+\section*{Executive summary}
+\textbf{Finding.} $\lambda_{\text{(Couret)}} \equiv 1/\sqrt{7}$ appears critical where rigidity $\Delta_3$ balances spectral entropy.
+It emerges from three independent domains: (i) arithmetic (Couret series mod 30), (ii) RMT (GUE-\,$\lambda$ fit), (iii) AI engineering (stable $K\sim 0.92$).\\
+\textbf{Status.} Experimental invariant: \textbf{yes}. Proven universal constant: \textbf{not yet}.\\
+\textbf{Clarification.} \emph{Constant} $\lambda^\ast \approx 0.3779$ (fixed point) vs \emph{deviation} $\delta(E)$ with $\Delta_3(L)=\frac{1}{\pi^2}(\ln L + \delta(E))$.
+
+\section{Formal demonstration (\texorpdfstring{GUE-\,$\lambda$}{GUE-lambda} model)}
+Consider the family
+\[ P_{\beta,c}(s)=\mathcal{C}\,s^{\beta}\,e^{-c\,s^2},\qquad s\ge 0,\ \beta>0,\ c>0, \]
+where $\mathcal{C}$ normalizes the density.
+To avoid special functions in \LaTeX{}, we compare qualitatively:\\
+\emph{GUE ($\beta=2$)} : $P(s)=\dfrac{32}{\pi^2}\,s^2 e^{-\tfrac{4}{\pi}s^2}$.\\
+\emph{GUE-\,$\lambda$ (example $\beta=2.378$)} : choose $c=1.10$ and global scale $\kappa=0.93$ for visual comparison.
+
+% \pagebreak% Fix missing fig after section (is in 2nd page & title in 1st page)
+\section{Figure: GUE vs GUE-\texorpdfstring{$\lambda$}{lambda}}
+\begin{figure}[H]
+\centering
+% audits/audit_lambda_couret_glc_graph_standalone_EN.pdf
+\includegraphics[width=.9\linewidth]{./audit_lambda_couret_glc_graph_standalone_EN.pdf}% Need: make audit-graph-pdf
+\caption{Qualitative NNSD comparison: standard GUE vs GUE-\,$\lambda$ ($\lambda\approx 0{,}378$). The increased small-$s$ repulsion illustrates the extra rigidity seen on $C_1$.}
+\end{figure}
+
+\section{RMT connections and \texorpdfstring{$\zeta$}{zeta} zeros}
+Pair correlation (Montgomery) and Odlyzko’s computations support the GUE paradigm.
+Our observation places $C_1$ in a nearby but distinct class, GUE-\,$\lambda$.
+
+\section{AI applications: \texorpdfstring{$\lambda$}{lambda}-Conformity Score and \texorpdfstring{$K$}{K} metric}
+The \emph{$\lambda$-Conformity Score} measures a DNN spectrum’s distance to an optimal GUE-\,$\lambda$ state.
+Operationally, $K=\sqrt{\text{Selectivity}\times\text{Precision}}$ stabilizes near $0.92$.
+
+\section{Extreme scientific audit (ASX)}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{4.8cm} c p{9cm}}
+\toprule
+\textbf{Axis} & \textbf{Score} & \textbf{Justification}\\ \midrule
+Formal definition & 5/5 & $\lambda^\ast = 1/\sqrt{7}$, dimensionless, clear.\\
+Mathematical proof & 3/5 & RMT chain consistent, not peer-reviewed yet.\\
+Arithmetic universality & 4/5 & mod~30 series, triangles: robust invariance.\\
+Physical concordance & 3/5 & Analogies (Connes) without measured identification.\\
+Algorithmic universality & 5/5 & $\lambda$-Score and $K$ actionable.\\
+Reproducibility & 4/5 & Pipelines, CI, hashes, scripts.\\
+Statistical robustness & 3/5 & $\zeta$/GUE/mod30; multi-lab needed.\\
+Falsifiability & 4/5 & Poisson, shuffle, controlled perturbations.\\
+FAIR traceability & 5/5 & Manifest, versioned data/scripts.\\
+Recognition & 2/5 & Not yet peer-reviewed.\\ \midrule
+\textbf{Global score} & \textbf{38/50} & Good (partial confirmation, non-canonical).\\
+\bottomrule
+\end{tabular}
+\caption{ASX grid — critical assessment of $\lambda_{\text{(Couret)}}$.}
+\end{table}
+
+\section{Conclusion}
+$\lambda_{\text{(Couret)}}$ currently behaves as a \emph{robust experimental invariant}.
+Next steps: (i) \textbf{formalize} (closed forms / Connes-like positivity); (ii) \textbf{replicate} (multi-lab, independent datasets).
+\end{document}

@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>InterIA · Analytic Framework (T1′–T4) v1.0.0</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%230d47a1%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-size=%2254%22 fill=%22white%22 font-family=%22sans-serif%22>λ</text></svg>">
+<style>
+.dark{display:none}
+@media(prefers-color-scheme:dark){
+  .dark{display:block;}
+  .light{display:none;}
+}
+:root{
+  --fg:#0b1320;--muted:#5b667a;--link:#1565c0;--chip:#eef3ff;--bg:#f7f9fc;--kw:#227744;--bgbq:#fafcff;--bghero:#fff;--card:#fff;--ccardh:0,0,0,.08;
+  color-scheme: light dark;
+  --fg:light-dark(#0b1320,#fafcd2);--muted:light-dark(#5b667a,#c9c9c9);--link:light-dark(#1565c0,#fac290);
+  --chip:light-dark(#eef3ff,#227744);--bg:light-dark(#f7f9fc,#0d2b3b);--kw:light-dark(#227744,#b6f4d1);
+  --bgbq:light-dark(#fafcff,#0f3850);--bghero:light-dark(#fff,#1a1a1a);--card:light-dark(#fff,#222);
+  --ccardh:light-dark(rgba(0,0,0,.08),rgba(255,255,255,.08));
+}
+:root{
+  &:has(input[name="color-scheme"][value="light dark"]:checked){color-scheme:light dark;}
+  &:has(input[name="color-scheme"][value="light"]:checked){color-scheme:light;.dark{display:none}.light{display:block}}
+  &:has(input[name="color-scheme"][value="dark"]:checked){color-scheme:dark;.light{display:none}.dark{display:block}}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
+.wrap{max-width:1080px;margin:auto;padding:40px 24px}
+h1{font-size:28px;margin:0 0 6px}
+h2{font-size:22px;margin:22px 0 8px}
+.hero{background:var(--bghero);border-radius:14px;padding:22px 20px;box-shadow:0 6px 24px rgba(0,20,60,.06)}
+.hero h1 img{vertical-align:middle;margin-right:8px;border-radius:8px;width:36px;height:36px;object-fit:cover}
+.grid{display:grid;gap:18px;margin:18px 0}
+@media(min-width:900px){.grid{grid-template-columns:1.2fr 1fr 1fr}}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+.chips span{display:inline-block;background:var(--chip);padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:12px;color:var(--kw)}
+.muted{color:var(--muted)}
+blockquote{border-left:4px solid #cbd6ff;margin:18px 0;padding:8px 14px;background:var(--bgbq)}
+.section{margin-top:24px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(0,0,0,.05)}
+.card img{width:100%;height:150px;object-fit:contain;background:var(--bgbq);border-radius:8px}
+.card h4{margin:10px 0 6px;font-size:15px}
+.card p{margin:0;font-size:13px;color:var(--muted)}
+.footer{margin-top:26px;font-size:13px;color:var(--muted)}
+.top-bar{position:fixed;top:5px;left:5px;padding:10px 15px;background:rgba(0,0,0,.7);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2);z-index:1000}
+.top-bar-right{left:initial;right:5px;}
+.light-switch label{cursor:pointer;margin:0 .25rem;color:#fff}
+.light-switch input[type="radio"]{display:none}
+.light-switch input[type="radio"] + label{padding:2px 8px}
+.light-switch input[type="radio"]:checked + label{background:rgba(255,255,255,.85);color:#111;border-radius:999px;}
+ul{margin:0;padding-left:18px}
+.contact-block{
+  border-radius:14px;
+  box-shadow:0 6px 24px rgba(0,20,60,.06);
+}
+.contact-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:12px;
+}
+.contact-head h2{margin:0;font-size:24px;}
+.lang-toggle label{
+  font:600 12px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  padding:4px 10px;border:1px solid var(--muted);border-radius:999px;cursor:pointer;color:var(--fg);
+}
+.lang-toggle input:checked + label{background:var(--chip);border-color:var(--link);color:var(--link);}
+.contact-pane,.contact-block input[name="lang"]{display:none;}
+#lang-en:checked ~ #contact-en{display:block;}
+#lang-fr:checked ~ #contact-fr{display:block;}
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.contact-card{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:16px;border:1px solid var(--ccardh);border-radius:12px;
+  background:var(--bg);text-decoration:none;color:var(--fg);
+  transition:transform .06s ease,box-shadow .15s ease;
+}
+.contact-card:hover{transform:translateY(-1px);box-shadow:0 8px 18px var(--ccardh);text-decoration:none;}
+.contact-card .icon{font-size:22px;line-height:1;}
+.contact-card h3{margin:0 0 4px;font-size:16px;}
+.contact-card p{margin:0;color:var(--muted);font-size:14px;}
+.top-bar a{padding:2px 4px}
+.top-bar a:hover{text-decoration:none}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>
+      <a href="https://github.com/couret-interia"><img src="https://avatars.githubusercontent.com/u/237357674?s=200&v=4" alt="InterIA logo" width="36"></a>
+      InterIA — Analytic Framework (T1′–T4) <span class="muted">v1.0.0</span>
+    </h1>
+    <p class="muted">Proof-only · journal-ready · arXiv-compatible</p>
+    <blockquote><em>“From analysis to clarity: a proof of the framework — not of Riemann.”</em></blockquote>
+
+    <div class="grid">
+      <div>
+        <h3>📄 Papers & Guides</h3>
+        <ul>
+          <li><a href="src/main_journal.pdf">Main Journal (EN, PDF)</a></li>
+          <li><a href="src/main_journal_FR.pdf">Journal (FR, PDF)</a></li>
+          <li><a href="docs/explication-grand-format/latex/graphe_dependances_standalone.pdf">Dependency Map (PDF)</a></li>
+          <li><a href="docs/explication-grand-format/latex/graphe_dependances_standalone.png">Dependency Map (PNG)</a></li>
+          <li><a href="audits/audit_lambda_couret_EN.pdf">Scientific Audit — λ(Couret) (EN, PDF)</a> - <a href="audits/audit_lambda_couret_light_EN.pdf">Light</a></li>
+          <li><a href="audits/audit_lambda_couret_FR.pdf">Audit scientifique — λ(Couret) (FR, PDF)</a> - <a href="audits/audit_lambda_couret_light_FR.pdf">Light</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>⬇️ Artifacts</h3>
+        <ul>
+          <li><a href="dist/arxiv_package.tar.gz">arXiv Package (tar.gz)</a></li>
+          <li><a href="RELEASE_NOTES_TEMPLATE.md">Release Notes</a></li>
+          <li><a href="ABOUT_INTERIA.md">About InterIA</a></li>
+          <li><a href="CITATION.cff">CITATION.cff</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>🔗 Indexes</h3>
+        <ul>
+          <li><a href="https://doi.org/10.5281/zenodo.18802769">DOI (Zenodo): 10.5281/zenodo.18802769</a></li>
+          <li><a href="CITATION.cff">CITATION.cff</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section" id="gallery">
+      <h2>🖼️ Proof Gallery</h2>
+      <div class="gallery">
+        <a class="card" href="src/main_journal.pdf">
+          <img src="docs/explication-grand-format/latex/graphe_dependances_dark.png" alt="Journal EN thumbnail" class="dark">
+          <img src="docs/explication-grand-format/latex/graphe_dependances_standalone.png" alt="Journal EN thumbnail" class="light">
+          <h4>Journal — EN</h4>
+          <p>Dependency map for T1′–T4</p>
+        </a>
+        <a class="card" href="src/main_journal_FR.pdf">
+          <img src="docs/explication-grand-format/latex/graphe_dependances_dark_FR.png" alt="Journal FR thumbnail" class="dark">
+          <img src="docs/explication-grand-format/latex/graphe_dependances_standalone_FR.png" alt="Journal FR thumbnail" class="light">
+          <h4>Journal — FR</h4>
+          <p>Carte de dépendances du schéma T1′ –T4</p>
+        </a>
+        <a class="card" href="audits/audit_lambda_couret_EN.pdf">
+          <img src="audits/audit_lambda_couret_glc_graph_dark_EN.png" alt="Audit EN thumbnail" class="dark">
+          <img src="audits/audit_lambda_couret_glc_graph_standalone_EN.png" alt="Audit EN thumbnail" class="light">
+          <h4>Audit λ(Couret) — EN</h4>
+          <p>GUE vs GUE-λ • NNSD • Δ₃</p>
+        </a>
+        <a class="card" href="audits/audit_lambda_couret_FR.pdf">
+          <img src="audits/audit_lambda_couret_glc_graph_dark_FR.png" alt="Audit FR thumbnail" class="dark">
+          <img src="audits/audit_lambda_couret_glc_graph_standalone_FR.png" alt="Audit FR thumbnail" class="light">
+          <h4>Audit λ(Couret) — FR</h4>
+          <p>GUE vs GUE-λ • NNSD • Δ₃</p>
+        </a>
+        <a class="card" href="audits/audit_lambda_couret_light_EN.pdf">
+          <img src="audits/audit_lambda_couret_glc_graph_dark_EN.png" alt="Audit EN thumbnail" class="dark">
+          <img src="audits/audit_lambda_couret_glc_graph_standalone_EN.png" alt="Audit EN thumbnail" class="light">
+          <h4>Audit λ(Couret) — EN (light)</h4>
+          <p>GUE vs GUE-λ • NNSD • Δ₃</p>
+        </a>
+        <a class="card" href="audits/audit_lambda_couret_light_FR.pdf">
+          <img src="audits/audit_lambda_couret_glc_graph_dark_FR.png" alt="Audit FR thumbnail" class="dark">
+          <img src="audits/audit_lambda_couret_glc_graph_standalone_FR.png" alt="Audit FR thumbnail" class="light">
+          <h4>Audit λ(Couret) — FR (light)</h4>
+          <p>GUE vs GUE-λ • NNSD • Δ₃</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="chips">
+      <span>math.NT</span>
+      <span>random-matrix-theory</span>
+      <span>spectral-form-factor</span>
+      <span>wave-packets</span>
+    </div>
+
+    <!-- ===== InterIA · Contact & Feedback (FR/EN) ===== -->
+    <div class="section contact-block" id="contact">
+      <div class="contact-inner">
+        <div class="contact-head">
+          <h2>👥 Contact &amp; Feedback</h2>
+        </div>
+        <!-- Language toggle -->
+        <div class="lang-toggle" role="tablist" aria-label="Language">
+          <input id="lang-fr" type="radio" name="lang" checked>
+          <label for="lang-fr" aria-controls="contact-fr">FR</label>
+          <input id="lang-en" type="radio" name="lang">
+          <label for="lang-en" aria-controls="contact-en">EN</label>
+          <!-- EN -->
+          <div id="contact-en" class="contact-pane" role="tabpanel">
+            <p class="lede">
+              Have a question, found an issue, or want to collaborate with the <strong>InterIA</strong> team?
+              We’d love to hear from you. Choose one of the channels below:
+            </p>
+
+            <div class="contact-grid">
+              <a class="contact-card" href="https://github.com/couret-interia/community/discussions/new?category=general" target="_blank" rel="noopener">
+                <div class="icon">💬</div>
+                <div class="meta">
+                  <h3>Start a Discussion</h3>
+                  <p>Ask questions, propose ideas, or join ongoing threads in our public forum.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://github.com/couret-interia/rh-analytic-framework-t1t4/issues/new/choose" target="_blank" rel="noopener">
+                <div class="icon">🐞</div>
+                <div class="meta">
+                  <h3>Report an Issue</h3>
+                  <p>Found a bug or have a reproducible problem? Open an issue with details &amp; context.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://doi.org/10.5281/zenodo.18802769" target="_blank" rel="noopener">
+                <div class="icon">🔳</div>
+                <div class="meta">
+                  <h3>Zenodo DOI</h3>
+                  <p>10.5281/zenodo.18802769</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://couret-interia.fr/contact" target="_blank" rel="noopener">
+                <div class="icon">✉️</div>
+                <div class="meta">
+                  <h3>Private Message</h3>
+                  <p>Prefer private outreach? Use our lightweight form to reach the maintainers.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://github.com/couret-interia" target="_blank" rel="noopener">
+                <div class="icon">🌐</div>
+                <div class="meta">
+                  <h3>Organization</h3>
+                  <p>Explore all repositories, roadmap, and contribution opportunities.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- FR -->
+          <div id="contact-fr" class="contact-pane" role="tabpanel">
+            <p class="lede">
+              Une question, un bug, une idée ou une envie de contribuer avec l’équipe <strong>InterIA</strong> ?
+              Écrivez-nous via l’un des canaux ci-dessous :
+            </p>
+
+            <div class="contact-grid">
+              <a class="contact-card" href="https://github.com/couret-interia/community/discussions/new?category=general" target="_blank" rel="noopener">
+                <div class="icon">💬</div>
+                <div class="meta">
+                  <h3>Ouvrir une discussion</h3>
+                  <p>Posez vos questions, proposez des idées ou participez aux échanges en cours.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://github.com/couret-interia/rh-analytic-framework-t1t4/issues/new/choose" target="_blank" rel="noopener">
+                <div class="icon">🐞</div>
+                <div class="meta">
+                  <h3>Signaler un problème</h3>
+                  <p>Repéré un bug ou un souci reproductible ? Ouvrez un ticket avec le contexte.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://doi.org/10.5281/zenodo.18802769" target="_blank" rel="noopener">
+                <div class="icon">🔳</div>
+                <div class="meta">
+                  <h3>Zenodo DOI</h3>
+                  <p>10.5281/zenodo.18802769</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://couret-interia.fr/contact" target="_blank" rel="noopener">
+                <div class="icon">✉️</div>
+                <div class="meta">
+                  <h3>Message privé</h3>
+                  <p>Besoin d’échanger en privé ? Utilisez notre formulaire sécurisé.</p>
+                </div>
+              </a>
+
+              <a class="contact-card" href="https://github.com/couret-interia" target="_blank" rel="noopener">
+                <div class="icon">🌐</div>
+                <div class="meta">
+                  <h3>Organisation</h3>
+                  <p>Parcourez l’ensemble des dépôts, la roadmap et les opportunités de contribution.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===== /Contact block ===== -->
+
+    <p class="footer">© 2026 Alexandre Couret & InterIA Collaborators · MIT</p>
+  </div>
+</div>
+
+<div class="top-bar">
+  <a href="#contact" title="Contact zone (FR/EN)">👥</a>
+  <a href="https://github.com/couret-interia/community/discussions" title="Join the discussion">💬</a>
+</div>
+
+<div class="light-switch top-bar top-bar-right" title="💡 Dark/Light">
+  <input id="rls" name="color-scheme" type="radio" value="light dark" checked><label for="rls" title="System">🌓</label>
+  <input id="rll" name="color-scheme" type="radio" value="light"><label for="rll" title="Light">🌞</label>
+  <input id="rld" name="color-scheme" type="radio" value="dark"><label for="rld" title="Dark">🌙</label>
+</div>
+</body>
+</html>

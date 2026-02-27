@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "A Modular Analytic Framework for the Riemann Hypothesis (T1′–T4)"
+message: "If you use this work, please cite the DOI below."
+type: software
+authors:
+  - name: "Alexandre Couret"
+  - name: "InterIA Mathematical Collective"
+repository-code: "https://github.com/couret-interia/rh-analytic-framework-t1t4"
+doi: "10.5281/zenodo.18802769"
+license: MIT
+version: "v1.0.0"
+date-released: "2026-02-27"
+keywords:
+  - mathematics
+  - number-theory
+  - riemann-hypothesis
+  - analytic-framework
+  - random-matrix-theory
+  - spectral-form-factor
+  - frame-theory
+  - schur-test
+  - gershgorin
+  - wave-packets
+  - reproducibility
+  - arxiv
+  - zenodo
+  - explicit-formula
+  - latex

@@ -1,0 +1,24 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx,relinput}
+\relinput{.}{authors_cmd}
+\DeclareUnicodeCharacter{2032}{\prime}
+% Commands from `proofarticle.cls` (important to compile)
+\newcommand{\Cfrw}{C_{\mathrm{fr}}^{(w)}}
+\newcommand{\Thetaw}{\Theta_w}
+\title{\texorpdfstring{Interdisciplinary Guide — T1$′$–T4 \& InterIA}{Interdisciplinary Guide — T1′–T4 \& InterIA}}
+\author{\InterIAPDFAuthors}
+\date{\today}
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{Reading routes}\small\input{explication-grand-format/latex/00_persona_routes}\end{frame}
+\begin{frame}{Dictionary (condensed)}\scriptsize\input{explication-grand-format/latex/01_translation_dictionary}\end{frame}
+\begin{frame}{Storyboard T1$′$–T4}\small\input{explication-grand-format/latex/02_storyboard_t1t4}\end{frame}
+\begin{frame}{Bridges}\small\input{explication-grand-format/latex/04_bridges_boxes}\end{frame}
+\begin{frame}{Micro-example T2}\small\input{explication-grand-format/latex/03_micro_example_t2}\end{frame}
+\begin{frame}{Dependency map}\centering
+\includegraphics[width=.92\linewidth]{explication-grand-format/latex/graphe_dependances_standalone.pdf}
+\end{frame}
+\end{document}

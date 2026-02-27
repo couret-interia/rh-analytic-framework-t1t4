@@ -1,0 +1,139 @@
+name: build-and-package
+on:
+  push:
+    tags:
+      - 'v*'           # ex: v1.0.0, v1.0.0-rc1
+  workflow_dispatch:
+
+jobs:
+  build-and-zip:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    # nécessaire pour créer une Release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-fonts-extra \
+            texlive-lang-french texlive-science \
+            latexmk biber poppler-utils rsync zip
+
+      - name: Build PDFs, graphs & audits λ(Couret)
+        run: |
+          set -e
+          make dep-graph-pdf
+          make journal-pdf
+          make journal-pdf-fr
+          make all-audit
+          make guide-pdf
+          make guide-beamer
+          make all-demo
+          make all-graph
+
+      - name: Prepare bundle layout (All-docs)
+        run: |
+          rm -rf bundle dist && mkdir -p bundle dist
+
+          # Journaux
+          cp -v main_arxiv.pdf bundle/ || true
+          cp -v src/main_journal_FR.pdf bundle/ || true
+          cp -v src/main_journal.pdf    bundle/ || true
+          # Audits λ(Couret)  FR/EN (final ou light, peu importe si tes cibles Make génèrent les deux)
+          cp -v audits/audit_lambda_couret_FR.pdf        bundle/ || true
+          cp -v audits/audit_lambda_couret_EN.pdf        bundle/ || true
+          cp -v audits/audit_lambda_couret_light_FR.pdf  bundle/ || true
+          cp -v audits/audit_lambda_couret_light_EN.pdf  bundle/ || true
+          # Graphes Audits λ(Couret) (PNG léger)
+          cp -v audits/audit_lambda_couret_glc_graph_standalone_FR.png  bundle/ || true
+          cp -v audits/audit_lambda_couret_glc_graph_standalone_EN.png  bundle/ || true
+          cp -v audits/audit_lambda_couret_glc_graph_dark_FR.png        bundle/ || true
+          cp -v audits/audit_lambda_couret_glc_graph_dark_EN.png        bundle/ || true
+          # Guides
+          cp -v docs/guide_interdisciplinaire.pdf        bundle/ || true
+          cp -v docs/guide_interdisciplinaire_beamer.pdf bundle/ || true
+          # Démos
+          cp -v docs/demo_T1p_T4_FR.pdf                  bundle/ || true
+          cp -v docs/demo_T1p_T4_EN.pdf                  bundle/ || true
+          cp -v docs/demo_T1p_T4_beamer_FR.pdf           bundle/ || true
+          cp -v docs/demo_T1p_T4_beamer_EN.pdf           bundle/ || true
+          cp -v docs/demonstration_finale_RH_FR.pdf      bundle/ || true
+          cp -v docs/demonstration_finale_RH_EN.pdf      bundle/ || true
+          # Graphes
+          cp -v docs/explication-grand-format/latex/graphe_dependances_standalone_FR.png bundle/ || true
+          cp -v docs/explication-grand-format/latex/graphe_dependances_standalone.png    bundle/ || true
+          cp -v docs/explication-grand-format/latex/graphe_dependances_dark_FR.png       bundle/ || true
+          cp -v docs/explication-grand-format/latex/graphe_dependances_dark.png          bundle/ || true
+
+      - name: Build FINAL bundle (Make target that calls scripts/build_final_bundle.sh)
+        run: |
+          make zip-final-bundle
+          # Archive couret-interia_rh-analytic-framework-t1t4-v1.0.0FINAL_bundle.zip créée
+
+      - name: Derive tag & prerelease flag
+        id: rel
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          if echo "$TAG" | grep -Eiq '(alpha|beta|rc|pre)'; then
+            echo "prerelease=true"  >> $GITHUB_OUTPUT
+          else
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Versioned filenames
+        id: files
+        run: |
+          TAG='${{ steps.rel.outputs.tag }}'
+          # 1) Renommer le “All-docs” avec le tag
+          cd bundle
+          zip -qr "../dist/All-docs-Riemann-Hypothesis-T1p-T4_interIA-${TAG}.zip" .
+          cd ..
+          echo "ALLDOCS=dist/All-docs-Riemann-Hypothesis-T1p-T4_interIA-${TAG}.zip" >> $GITHUB_OUTPUT
+          # 2) Renommer le FINAL bundle avec le tag
+          mv "couret-interia_rh-analytic-framework-t1t4-v1.0.0FINAL_bundle.zip" \
+             "couret-interia_rh-analytic-framework-t1t4-${TAG}_FINAL_bundle.zip"
+          echo "FINAL=couret-interia_rh-analytic-framework-t1t4-${TAG}_FINAL_bundle.zip" >> $GITHUB_OUTPUT
+
+      # Artefacts “Actions” (optionnel, utile pour test sans release)
+      - name: Upload artifact — All-docs (tagged)
+        uses: actions/upload-artifact@v4
+        with:
+          name: All-docs-Riemann-Hypothesis-T1p-T4_interIA-${{ steps.rel.outputs.tag }}.zip
+          path: ${{ steps.files.outputs.ALLDOCS }}
+          retention-days: 60
+
+      - name: Upload artifact — FINAL bundle (tagged)
+        uses: actions/upload-artifact@v4
+        with:
+          name: couret-interia_rh-analytic-framework-t1t4-${{ steps.rel.outputs.tag }}_FINAL_bundle.zip
+          path: ${{ steps.files.outputs.FINAL }}
+          retention-days: 60
+
+      - name: Generate release notes from template
+        id: notes
+        run: |
+          TAG="${{ steps.rel.outputs.tag }}"
+          TODAY="$(date -u +%Y-%m-%d)"
+          sed \
+            -e "s/{{VERSION}}/${TAG}/g" \
+            -e "s/{{DATE}}/${TODAY}/g" \
+            RELEASE_NOTES_TEMPLATE.md > RELEASE_NOTES_${TAG}.md
+          echo "NOTES=RELEASE_NOTES_${TAG}.md" >> "$GITHUB_OUTPUT"
+
+      # Création de la Release + assets (automatique sur push de tag)
+      - name: Create GitHub Release & upload assets
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.rel.outputs.tag }}
+          name:     InterIA — Analytic Framework (T1′–T4) ${{ steps.rel.outputs.tag }}
+          body_path: ${{ steps.notes.outputs.NOTES }}
+          files: |
+            ${{ steps.files.outputs.ALLDOCS }}
+            ${{ steps.files.outputs.FINAL }}
+          prerelease: ${{ steps.rel.outputs.prerelease }}

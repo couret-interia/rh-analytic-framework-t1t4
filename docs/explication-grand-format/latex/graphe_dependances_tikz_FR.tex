@@ -1,0 +1,10 @@
+% Graphe des dépendances — version TikZ (FR)
+\begin{tikzpicture}[>=Stealth, node distance=1.6cm, every node/.style={font=\small}]
+\tikzstyle{box}=[rectangle,draw,rounded corners=3pt,inner sep=5pt]
+\node[box] (t1) {T1$'$ : Explicite + PW + Arch.};
+\node[box,below left=of t1] (t2) {T2 : Frame (borne)};
+\node[box,below      =of t1] (t3) {T3 : Paquet d’ondes};
+\node[box,below right=of t1] (t4) {T4 : Positivité croisée};
+\draw[->] (t1)--(t2); \draw[->] (t1)--(t3); \draw[->] (t1)--(t4);
+\draw[->,dashed] (t2)--(t4); \draw[->,dashed] (t3)--(t4);
+\end{tikzpicture}

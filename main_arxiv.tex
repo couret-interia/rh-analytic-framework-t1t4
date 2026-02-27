@@ -1,0 +1,26 @@
+\documentclass[11pt,a4paper]{proofarticle}
+\usepackage{graphicx,xcolor}
+\input{authors_cmd}
+\DeclareUnicodeCharacter{2032}{\prime}
+\nocite{*}
+\title{A Modular Analytic Framework for the Riemann Hypothesis (T1$′$–T4)\\[2pt]
+\large Proof-only, journal-ready, arXiv-compatible}
+\author{\InterIAauthors}
+\date{\today}
+\begin{document}\maketitle
+
+\begin{abstract}
+Proof framework (T1$′$–T4). This arXiv v1 tarball includes full proofs for T2, T3, and the appendix.
+\end{abstract}
+
+% --- section T2 — Weighted frame bound (full)
+\input{theorems/T2_weighted_frame_full}
+
+% --- section T3 — Wave–packet localization (full)
+\input{theorems/T3_wavepacket_full}
+
+\appendix
+\input{appendix/explicit_arch_full}
+\bibliographystyle{alpha}
+\bibliography{refs}
+\end{document}

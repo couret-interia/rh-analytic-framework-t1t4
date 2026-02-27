@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.88\linewidth, height=6cm,
+    ymin=0, xmin=0, xmax=3,
+    xlabel={$s$ (\txl)}, ylabel={$P(s)$},
+    legend pos=north east, grid=both, samples=400, domain=0:3,
+    legend style={fill=black!20!white,text=white!20!black},
+  ]
+    % GUE β=2
+    \addplot[very thick,blue] { Pbeta(\bet,x) };
+    \ExpandArgs {e} \addlegendentry{GUE ($\beta=\num{\bet}$)}
+
+    % GUE-λ : β = 2 + λ
+    \pgfmathsetmacro{\bet}{\bet+\lam}
+    \addplot[very thick,red,dashed] { Pbeta(\bet,x) };
+    \ExpandArgs {e} \addlegendentry{GUE-$\lambda$ ($\beta\approx\num{\bet}$)}
+
+  \end{axis}
+\end{tikzpicture}

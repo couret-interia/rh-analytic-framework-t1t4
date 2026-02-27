@@ -1,0 +1,47 @@
+repos:
+  - repo: local
+    hooks:
+      # ===== Build arXiv =====
+      - id: compile-latex-arxiv
+        name: Compile arXiv tarball PDF
+        entry: bash -c "make arxiv-pdf"
+        language: system
+        pass_filenames: false
+        # Toujours exécuter, même si aucun fichier ne matche
+        always_run: true
+
+      - id: check-pdf-exists-arxiv
+        name: Check PDF (arXiv) exists
+        entry: bash -c "[ -f main_arxiv.pdf ] && echo '✅ PDF OK' || (echo '❌ Missing PDF' && exit 1)"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      # ===== Build journal FR =====
+      - id: compile-latex-journal-fr
+        name: Compile journal FR
+        entry: bash -c "make journal-pdf-fr"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-pdf-exists-fr
+        name: Check PDF (FR) exists
+        entry: bash -c "[ -f src/main_journal_FR.pdf ] && echo '✅ PDF OK' || (echo '❌ Missing PDF' && exit 1)"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: hash-update-fr
+        name: Update SHA256 (FR)
+        entry: bash -c "mkdir -p dist && sha256sum src/main_journal_FR.pdf > dist/main_journal_FR.pdf.sha256"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-audit-pdfs
+        name: Check PDFs (audits)
+        entry: bash -c 'test -f audits/audit_lambda_couret_FR.pdf && test -f audits/audit_lambda_couret_EN.pdf'
+        language: system
+        pass_filenames: false
+        always_run: true
