@@ -1,3 +1,5 @@
+> **Historical research archive — status clarification, 1 October 2026.** The T1′–T4 chain does not establish the Riemann hypothesis. Earlier “complete proof framework”, “Proof Article” and “journal-ready” descriptions below are preserved as historical wording and are superseded as current scientific status. Conditional or unsupported steps must not be presented as a completed proof. The historical DOI 10.5281/zenodo.18802769 identifies the earlier archive, not a newly validated result. See [CURRENT_STATUS.md](CURRENT_STATUS.md) and the [current bounded publications](https://www.couretunification.fr/publications-et-depots/).
+
 # A Modular Analytic Framework for the Riemann Hypothesis — Proof-only package (T2, T3, Appendix)
 
 **InterIA Mathematical Collective.**

@@ -1,3 +1,5 @@
+> **Historical research archive — status clarification, 1 October 2026.** The T1′–T4 chain does not establish the Riemann hypothesis. Earlier “complete proof framework”, “Proof Article” and “journal-ready” descriptions below are preserved as historical wording and are superseded as current scientific status. Conditional or unsupported steps must not be presented as a completed proof. The historical DOI 10.5281/zenodo.18802769 identifies the earlier archive, not a newly validated result. See [CURRENT_STATUS.md](CURRENT_STATUS.md) and the [current bounded publications](https://www.couretunification.fr/publications-et-depots/).
+
 <p align="right">
   <a href="https://github.com/couret-interia/community/discussions"><img alt="💬 Discussion" src="https://img.shields.io/badge/💬-Discussion-1e88e5?labelColor=0d47a1"></a>
   <sup> · </sup>
