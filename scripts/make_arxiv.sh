@@ -3,8 +3,18 @@ set -euo pipefail
 OUT="dist/arxiv_package.tar.gz"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+python3 scripts/status_manifest.py --check
+mkdir -p dist
 FILES=(
-  # proof-only inputs
+  # Historical inputs, inseparable from their withdrawal notice
+  "retraction_notice.tex"
+  "CURRENT_STATUS.md"
+  "governance/claims.json"
+  "governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md"
+  "ERRATUM_RH_T1T4_2026-10-13.md"
+  "F001_ERRATUM.md"
+  "HISTORICAL_DOCUMENTS.md"
+  "05-chebyshev-mod30/README.md"
   "main_arxiv.tex"
   "authors_cmd.tex"
   "proofarticle.cls"
@@ -13,22 +23,23 @@ FILES=(
   "appendix/explicit_arch_full.tex"
   "refs.bib"
 )
-TMPDIR="$(mktemp -d)"; mkdir -p "$TMPDIR"
+archive_tmp="$(mktemp -d)"
+trap 'rm -rf "$archive_tmp"' EXIT
 for f in "${FILES[@]}"; do
-  mkdir -p "$TMPDIR/$(dirname "$f")"
-  cp "$f" "$TMPDIR/$f"
+  mkdir -p "$archive_tmp/$(dirname "$f")"
+  cp "$f" "$archive_tmp/$f"
 done
 # README: use the light arXiv version (no badges/HTML/images)
 if [ -f "README_arxiv.md" ]; then
-  cp "README_arxiv.md" "$TMPDIR/README.md"
+  cp "README_arxiv.md" "$archive_tmp/README.md"
 elif [ -f "README.md" ]; then
   # fallback to full README if light one is missing
-  cp "README.md" "$TMPDIR/README.md"
+  cp "README.md" "$archive_tmp/README.md"
 fi
 
-# --- Build SHA256 manifest inside the payload (proof-only) --------------------
+# --- Build SHA256 manifest inside the historical payload --------------------
 (
-  cd "$TMPDIR" || exit 1
+  cd "$archive_tmp" || exit 1
 
   if command -v sha256sum >/dev/null 2>&1; then
     SHA256='sha256sum'
@@ -40,10 +51,10 @@ fi
   fi
 
   {
-    echo "MANIFEST (sha256) — proof-only payload"
+    echo "MANIFEST (sha256) — historical payload, RETRACTED AS PROOF"
     date -u +"generated_at: %Y-%m-%dT%H:%M:%SZ"
     echo
-    find . -maxdepth 2 -type f -print0 \
+    find . -type f ! -name MANIFEST_SHA256.txt -print0 \
       | sort -z \
       | xargs -0 $SHA256
   } > MANIFEST_SHA256.txt
@@ -52,12 +63,7 @@ fi
 
 # Sanity echo
 echo "arXiv payload:"
-find "$TMPDIR" -maxdepth 2 -type f -print
-# Build a simple SHA256 manifest inside the payload (proof-only)
-( cd "$TMPDIR" && \
-  { echo "MANIFEST (sha256) — arXiv payload"; date -u +"generated_at: %Y-%m-%dT%H:%M:%SZ"; echo; \
-    find . -maxdepth 2 -type f -print0 | sort -z | xargs -0 sha256sum; } \
-  > MANIFEST_SHA256.txt )
-tar -czf "$OUT" -C "$TMPDIR" .
+find "$archive_tmp" -maxdepth 2 -type f -print
+tar -czf "$OUT" -C "$archive_tmp" .
 sha256sum "$OUT" > "${OUT}.sha256"
 echo "arXiv package -> $OUT + ${OUT}.sha256"

@@ -4,7 +4,9 @@ jobs:
   latex:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check withdrawn-proof status
+        run: python3 scripts/status_manifest.py --check
       - name: Install TeX Live
         run: |
           sudo apt-get update
@@ -16,7 +18,7 @@ jobs:
       - name: Build audit λ(Couret) FR/EN
         run: make all-audit
       - name: Upload audit PDFs + manifest
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: audit-lambda-couret_FR_EN
           path: |
@@ -49,7 +51,7 @@ jobs:
       - name: Build all graphe_dependances (pdf & png)
         run: make all-graph
       - name: Upload all docs guide & demos (FR & EN) + graphes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: All-docs-Riemann-Hypothesis-T1p-T4_interIA
           path: |
@@ -67,14 +69,14 @@ jobs:
             docs/explication-grand-format/latex/graphe_dependances_dark.png
           retention-days: 30
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: src-main_journal-pdf
           path: src/main_journal.pdf
       - name: Build arXiv tarball
         run: make arxiv
       - name: Upload arXiv tarball
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: arxiv-package
           path: |

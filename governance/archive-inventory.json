@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "historical_commit": "2ce7cca9b79c537a1893ee316ccf5c7be6af8912",
+  "merged_baseline": "a27fbd98845e73cda1e0ee0c0ff9d06d8a972f0c",
+  "original_package_sha256": "c4366f234b270b5cf8952e71a2fe395b10f79d4a6b08faad4a4b4b2721661d43",
+  "files": [
+    {
+      "path": "05-chebyshev-mod30/README.md",
+      "sha256": "437a1cbf13b3b53ae552c98173abbfa8cc44567782bb6e1a64544f047a3c70a0"
+    },
+    {
+      "path": "ABOUT_INTERIA.md",
+      "sha256": "83119bb38fd66298e24f8ed6769b83e637eabed9dfb1ccdb047cc90296810c71"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "ff7f2c2871711abc9031943d3e1d1eae8fed9974a8edd6a2bac7f58054bd1bdb"
+    },
+    {
+      "path": "CHANGELOG_FR.md",
+      "sha256": "78d594b27f978e1ce1a3c580c0f089bfbf60a8a1a3cb1479faaa8f8dd8a94acd"
+    },
+    {
+      "path": "ERRATUM_RH_T1T4_2026-10-13.md",
+      "sha256": "4d7109fcc78848522e5e3ffb448e02382951252d78229a82b3fdbb323196741b"
+    },
+    {
+      "path": "F001_ERRATUM.md",
+      "sha256": "f97445e41a17c59dfe0c6ed455751dc0965ea65ed0db4ba67935a580c887c720"
+    },
+    {
+      "path": "HISTORICAL_DOCUMENTS.md",
+      "sha256": "9993bea8a84102acd38d9e5fe192fbf227b6af069cb975eb53795e6fc78f643b"
+    },
+    {
+      "path": "RELEASE_NOTES_TEMPLATE.md",
+      "sha256": "cec58050741ea500a94e1f4328f156cf614ca0a77f3e5f618a74b8ece01efe7f"
+    },
+    {
+      "path": "audit/pdf-withdrawal-20261020.json",
+      "sha256": "10d0f6f8eb84d0ec6e86fa540b4fce66509ca73ec89c671940f1a7444dec6268"
+    },
+    {
+      "path": "audits/MANIFEST_SHA256.txt",
+      "sha256": "8205d37a84fa1e1765e49cdc7021d88400c890eb3255dcfa4da4be0425819fb0"
+    },
+    {
+      "path": "audits/audit_lambda_couret_EN.pdf",
+      "sha256": "77bcbe5cddbd54fa5d4212bcc2e68dbff1bb98401b05b9f68871aa9e7b948687"
+    },
+    {
+      "path": "audits/audit_lambda_couret_EN.tex",
+      "sha256": "8aced1c96cac77646c649880340e1db6027e18ca1b54d10195c3bd2f25e4d3df"
+    },
+    {
+      "path": "audits/audit_lambda_couret_FR.pdf",
+      "sha256": "4923f265b9e20141801c2ef0cf358a952854440447c312d46a7f8056d2cad91b"
+    },
+    {
+      "path": "audits/audit_lambda_couret_FR.tex",
+      "sha256": "f80a07478242f97fe118be1da116b2d2e281971dea9f4ecbb66a1341b3568b6b"
+    },
+    {
+      "path": "audits/audit_lambda_couret_light_EN.pdf",
+      "sha256": "7b1a60d53a671553d797774a260be2e21d732ba2e2572cf29a14b0c23e9b6ef2"
+    },
+    {
+      "path": "audits/audit_lambda_couret_light_EN.tex",
+      "sha256": "0920f0d1d88f7462aac98097703a7b6bebbfedfbedaa0fcc6874246bab45387f"
+    },
+    {
+      "path": "audits/audit_lambda_couret_light_FR.pdf",
+      "sha256": "20e7d14a3a236056584d8f094a5194b0c69edf16ea93b9b1138d69101d6973b3"
+    },
+    {
+      "path": "audits/audit_lambda_couret_light_FR.tex",
+      "sha256": "7087f40e97ed77cc9af8bb1eb2cfcfc32f6e66d316e67a210ef762d52b9c3d6a"
+    },
+    {
+      "path": "docs/demo_T1p_T4_EN.pdf",
+      "sha256": "7afe029a102dfcdb46787681b51630b4c55d09893ef410ec32d334d88352d68b"
+    },
+    {
+      "path": "docs/demo_T1p_T4_EN.tex",
+      "sha256": "0706be217cdf2f778d93bdbbfa63c401e314b57e73b809c0b0f6f0362ac8c016"
+    },
+    {
+      "path": "docs/demo_T1p_T4_FR.pdf",
+      "sha256": "db264d4833092136b58b14ff8d2017612437c01fe9726be9674b69987f820eb7"
+    },
+    {
+      "path": "docs/demo_T1p_T4_FR.tex",
+      "sha256": "baab7dad747b7e824c782d3734a88f67682972a3a34b1e575e10ee6301d83020"
+    },
+    {
+      "path": "docs/demo_T1p_T4_beamer_EN.pdf",
+      "sha256": "8ea5d85a241b5d26031db119238646162ab72a09bfedabe04e98bde92f264e21"
+    },
+    {
+      "path": "docs/demo_T1p_T4_beamer_EN.tex",
+      "sha256": "e466f812a26bf4de691285124a409bb540d1e6ab846f8975cb7ac489e755d765"
+    },
+    {
+      "path": "docs/demo_T1p_T4_beamer_FR.pdf",
+      "sha256": "547291e062e82f382e673a9c7e094f0981661d4046704a85bd35a9e96ac8ca5a"
+    },
+    {
+      "path": "docs/demo_T1p_T4_beamer_FR.tex",
+      "sha256": "dedf2ce76c427b2cc0adf203c805b814a785e56c766e95e8218a93ee68a0362b"
+    },
+    {
+      "path": "docs/demonstration_finale_RH_EN.pdf",
+      "sha256": "a8c6931592e4a119e607ea80950ba554b7683b39045154ab40bc061c564cc70a"
+    },
+    {
+      "path": "docs/demonstration_finale_RH_EN.tex",
+      "sha256": "9686fc30a1b455aa10b698a62ae3e034c004e957d16f7d0524809b842a479d61"
+    },
+    {
+      "path": "docs/demonstration_finale_RH_FR.pdf",
+      "sha256": "e710e9a76127aa4bf2648af0a58a4336e057959c00c8a55d89f76cc5e3139136"
+    },
+    {
+      "path": "docs/demonstration_finale_RH_FR.tex",
+      "sha256": "41e6c4a3b884f533aa240dd43cffd67fe9ff13ed49719270285cc2e13e114d54"
+    },
+    {
+      "path": "docs/guide_interdisciplinaire.pdf",
+      "sha256": "cdec21828961a0248c79fa27531130135b4c394ccca98df2dbe68af510cc0144"
+    },
+    {
+      "path": "docs/guide_interdisciplinaire.tex",
+      "sha256": "5b190590980bad1f0b524d8b5bc11b22d3b052927c4046bae0a407a591e4cd9e"
+    },
+    {
+      "path": "docs/guide_interdisciplinaire_beamer.pdf",
+      "sha256": "fe7870a96298c0aabd6f78ae6a27a7acf0b43e02d8d073469a0381f6de0b24c7"
+    },
+    {
+      "path": "docs/guide_interdisciplinaire_beamer.tex",
+      "sha256": "2378b0a3af3e105aa0f3296e8214629d1cefc6d954704d153841f0f7497524e1"
+    },
+    {
+      "path": "main_arxiv.pdf",
+      "sha256": "e8c85c02adcb6bb7d8454c8a8cf520ea3292cc697d26cbb555aac7948d679c76"
+    },
+    {
+      "path": "main_arxiv.tex",
+      "sha256": "2ac6d1e3c5c69d20b426cc9405da08ca1249a885d430193dd75af015eb2a4c38"
+    },
+    {
+      "path": "retraction_notice.tex",
+      "sha256": "eee3241ca53d694031333f6d9b2b28a441b99c7a42fde87f6c2ec425c2ebef49"
+    },
+    {
+      "path": "scripts/build_final_bundle.sh",
+      "sha256": "5bf0f70a132ae233994ab348791b0d1d13ce0e792d46ebe2ea1675515309af46"
+    },
+    {
+      "path": "scripts/make_arxiv.sh",
+      "sha256": "43e47cbdfc9dac10c989453b6220c1c591985bb08912facfb804520c97c88387"
+    },
+    {
+      "path": "src/main.tex",
+      "sha256": "3290ef9f9e1ade0eb2f24c2189fce414219822094d070288e7dad74182d6d02d"
+    },
+    {
+      "path": "src/main_journal.pdf",
+      "sha256": "78465f0d7523daaed26f1fdcdb79aa783bd655773fa9079b7c9025bac9f5a719"
+    },
+    {
+      "path": "src/main_journal.tex",
+      "sha256": "0157b7b8af8c0cfe874e25f5b5f2ae1666ce3c74e738efeebeb1d2f4363efee0"
+    },
+    {
+      "path": "src/main_journal_FR.pdf",
+      "sha256": "b7215589740893cd7d80a7603495ad4358bff2c0d54f42a813dc9a431ad4538d"
+    },
+    {
+      "path": "src/main_journal_FR.tex",
+      "sha256": "6a754888f988ac0f4d54e6ee1dca087e01f2e2907e01d4576be22b8b4ac595f8"
+    },
+    {
+      "path": "theorems/T2_borne_de_frame_complete_FR.tex",
+      "sha256": "555434de09d23e88be3765eaa9ad91ff5c1c7ac8035c5112b35022c22aecb082"
+    },
+    {
+      "path": "theorems/T2_weighted_frame_full.tex",
+      "sha256": "473f409b5d2945faf702755f49a2ae3c30a797a30e92c40df33665d6c3d91221"
+    },
+    {
+      "path": "theorems/T3_localisation_paquet_ondes_FR.tex",
+      "sha256": "c05911e92c76bfaf75123b1ff788941af732f3e7771164143a64178fd263c39d"
+    },
+    {
+      "path": "theorems/T3_wavepacket_full.tex",
+      "sha256": "34a33b20df168b3a0878f0694fc9963d0d060e3d3692a10ad01ed544847c0ffb"
+    },
+    {
+      "path": ".github/workflows/latex.yml",
+      "sha256": "1111be63c259cdeb4a04b9d4817f40d80a95a09a031ed0cced07813d8466713b"
+    },
+    {
+      "path": ".github/workflows/build-and-package.yml",
+      "sha256": "5398646a4140bbc3caf93fe4b28a4d70e2ca0ed3bb311333a54312a30be72013"
+    },
+    {
+      "path": ".github/workflows/markdown.yml",
+      "sha256": "9144af4bb9e6ad0c845b261c3531753b88a2545db5178ee33c896599250330be"
+    },
+    {
+      "path": ".github/workflows/status-manifest.yml",
+      "sha256": "92e65189d0c12987a8ebd50a99fb24b3afdbce7b4aced03ce22c36abdcdbcd26"
+    }
+  ],
+  "historical_markdown": [
+    {
+      "path": "ABOUT_INTERIA.md",
+      "historical_sha256": "da458a99c7348bdbd53eecad5698ded54b710cef8b17748f708c3c7e6e636ac9"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "historical_sha256": "7bdf7c94d9a34a253d7cd548b35cf00033789803836e6a5b213dc8f8c81d18da"
+    },
+    {
+      "path": "CHANGELOG_FR.md",
+      "historical_sha256": "c890ff20a8cf123eb5784d0f477c0cb29ad3281d1c42d40c93a129749fc81b73"
+    },
+    {
+      "path": "RELEASE_NOTES_TEMPLATE.md",
+      "historical_sha256": "eb2951476662cf04fd9ed066c621bb14692eba780adfbc173f7956bc9415930b"
+    }
+  ],
+  "theorem_sources": [
+    {
+      "path": "theorems/T2_borne_de_frame_complete_FR.tex",
+      "historical_sha256": "1123999002757548abe385ff7c96123e0fe1e9e4842716c9fec7804146ebd60c"
+    },
+    {
+      "path": "theorems/T2_weighted_frame_full.tex",
+      "historical_sha256": "7764762a98091c844bac98109ef55f083f3632688e60fc30503a0dd43da567bd"
+    },
+    {
+      "path": "theorems/T3_localisation_paquet_ondes_FR.tex",
+      "historical_sha256": "cd64c0917d67e78bf6baa5be02b51544143a07af2a870cbdf84ed03b78df17b0"
+    },
+    {
+      "path": "theorems/T3_wavepacket_full.tex",
+      "historical_sha256": "b23ac62f08453ab27a8acecd50004294ba52acfbcca38569750feb914a864e32"
+    }
+  ],
+  "tex_documents": [
+    "audits/audit_lambda_couret_EN.tex",
+    "audits/audit_lambda_couret_FR.tex",
+    "audits/audit_lambda_couret_light_EN.tex",
+    "audits/audit_lambda_couret_light_FR.tex",
+    "docs/demo_T1p_T4_EN.tex",
+    "docs/demo_T1p_T4_FR.tex",
+    "docs/demo_T1p_T4_beamer_EN.tex",
+    "docs/demo_T1p_T4_beamer_FR.tex",
+    "docs/demonstration_finale_RH_EN.tex",
+    "docs/demonstration_finale_RH_FR.tex",
+    "docs/guide_interdisciplinaire.tex",
+    "docs/guide_interdisciplinaire_beamer.tex",
+    "main_arxiv.tex",
+    "src/main.tex",
+    "src/main_journal.tex",
+    "src/main_journal_FR.tex"
+  ]
+}

@@ -80,3 +80,7 @@ Cayley or other branches. Import exact claim scopes and pinned evidence;
 do not populate their current scientific status from the integral audit alone.
 The registry location should be migrated once, with pinned consumer references,
 if a programme-wide canonical repository is later selected.
+
+## Archive coverage added after PR #2
+
+The register now also records the separate F-001 empirical withdrawal.

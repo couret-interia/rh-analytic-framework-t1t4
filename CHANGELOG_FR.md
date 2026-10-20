@@ -1,3 +1,23 @@
+# Archive historique T1′–T4
+
+<!-- BEGIN GENERATED SCIENTIFIC STATUS -->
+
+**RETRACTED AS PROOF — 2026-10-20**
+
+RETRACTED AS PROOF / ARGUMENT INVALIDÉ. La chaîne historique T1′–T4 est retirée comme démonstration, conformément à l’erratum du 13 octobre 2026. T2 omet la diagonale non unitaire de la matrice de Gram ; T3 emploie une normalisation incompatible du paquet d’ondes. Cette archive ne démontre pas l’hypothèse de Riemann. Les fichiers et identifiants historiques restent disponibles pour examiner les erreurs.
+
+[Erratum du 13 octobre 2026](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md) · [État courant](CURRENT_STATUS.md) · [Registre de statut](governance/claims.json)
+
+<!-- END GENERATED SCIENTIFIC STATUS -->
+
+## Historical record / Texte historique
+
+The following text is retained as historical material under the withdrawal above. It is not the current scientific status. The exact original is available at [commit 2ce7cca9](https://github.com/couret-interia/rh-analytic-framework-t1t4/blob/2ce7cca9b79c537a1893ee316ccf5c7be6af8912/CHANGELOG_FR.md).
+
+<details>
+<summary>Read the withdrawn historical text / Lire le texte historique retiré</summary>
+
+<!-- BEGIN WITHDRAWN HISTORICAL CONTENT -->
 # 📜 CHANGELOG — InterIA / Proof-Article / Cadre Analytique Modulaire pour l’Hypothèse de Riemann (T1′–T4)
 
 > **Note d’honnêteté :** l’hypothèse de Riemann reste ouverte.
@@ -67,3 +87,6 @@
 - **Mots-clés Zenodo :** mathematics, number-theory, riemann-hypothesis, analytic-framework, explicit-formula, frame-theory, schur-test, gershgorin, wave-packets, random-matrix-theory, spectral-form-factor, latex, arxiv, zenodo, reproducibility.
 - **Tag de release :** `v1.0.0`.
 - **Devise de commit :** *« From analysis to clarity — proof of the framework, not of RH. »*
+<!-- END WITHDRAWN HISTORICAL CONTENT -->
+
+</details>
