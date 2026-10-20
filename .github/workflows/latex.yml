@@ -7,6 +7,16 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Check withdrawn-proof status
         run: python3 scripts/status_manifest.py --check
+      - name: Build arXiv tarball
+        run: make arxiv
+      - name: Upload arXiv tarball
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: arxiv-package
+          path: |
+            dist/arxiv_package.tar.gz
+            dist/arxiv_package.tar.gz.sha256
+          retention-days: 30
       - name: Install TeX Live
         run: |
           sudo apt-get update
@@ -73,13 +83,3 @@ jobs:
         with:
           name: src-main_journal-pdf
           path: src/main_journal.pdf
-      - name: Build arXiv tarball
-        run: make arxiv
-      - name: Upload arXiv tarball
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: arxiv-package
-          path: |
-            dist/arxiv_package.tar.gz
-            dist/arxiv_package.tar.gz.sha256
-          retention-days: 30

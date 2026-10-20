@@ -198,7 +198,7 @@
     },
     {
       "path": ".github/workflows/latex.yml",
-      "sha256": "1111be63c259cdeb4a04b9d4817f40d80a95a09a031ed0cced07813d8466713b"
+      "sha256": "c51a312c75f1a13fd3e24f92ba0b7d4d7bdbb88e9e7693a794d8e06f240b43c5"
     },
     {
       "path": ".github/workflows/build-and-package.yml",
