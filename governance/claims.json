@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-20",
+  "coverage": "Pilot scope: the historical T1′–T4 proof chain and the T2/T3 errors documented on 13 October 2026. No status is assigned here to STROBO, Cayley or other branches.",
+  "rh_claimed": false,
+  "archive": {
+    "repository": "couret-interia/rh-analytic-framework-t1t4",
+    "source_commit": "2ce7cca9b79c537a1893ee316ccf5c7be6af8912",
+    "version": "v1.0.0",
+    "doi": "10.5281/zenodo.18802769"
+  },
+  "primary_claim": "RH-T1T4",
+  "readme_languages": {
+    "README.md": "en",
+    "README_FR.md": "fr",
+    "README_hero.md": "en",
+    "README_hero_FR.md": "fr",
+    "README_arxiv.md": "en"
+  },
+  "evidence": [
+    {
+      "id": "ERRATUM-20261013",
+      "kind": "source_document",
+      "source_repository": "alexcour/couret-finite-verifications",
+      "source_commit": "5bfca060ce3a4ed5687bd80d0cccab73767074b3",
+      "source_path": "ERRATUM_RH_T1T4_2026-10-13.md",
+      "source_url": "https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md",
+      "local_path": "governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md",
+      "sha256": "c8f7d558c1be55a687c978d1304e4b1afb899c20d3a28f04dc570d10bc283aad"
+    }
+  ],
+  "claims": [
+    {
+      "id": "RH-T1T4",
+      "statement": {
+        "en": "The historical T1′–T4 chain establishes the Riemann hypothesis",
+        "fr": "La chaîne historique T1′–T4 démontre l’hypothèse de Riemann"
+      },
+      "proof_status": "withdrawn_as_proof",
+      "status_date": "2026-10-13",
+      "public_summary": {
+        "en": "The historical T1′–T4 argument is invalid as a proof of the Riemann hypothesis. T2 omits nonzero Gram-matrix diagonal terms; T3 asserts an incompatible wave-packet normalization.",
+        "fr": "L’argument historique T1′–T4 est invalidé comme preuve de l’hypothèse de Riemann. T2 omet des termes diagonaux non nuls de la matrice de Gram ; T3 affirme une normalisation incompatible du paquet d’ondes."
+      },
+      "entry_mode": "C",
+      "priority_status": "not_assessed",
+      "external_review_status": "not_attested",
+      "evidence_ids": [
+        "ERRATUM-20261013"
+      ],
+      "depends_on": [
+        "RH-T2-LOWER-BOUND",
+        "RH-T3-NORMALIZATION"
+      ]
+    },
+    {
+      "id": "RH-T2-LOWER-BOUND",
+      "statement": {
+        "en": "T2 lower Gram-matrix bound as published",
+        "fr": "Borne inférieure de la matrice de Gram T2 telle que publiée"
+      },
+      "proof_status": "refuted_as_stated",
+      "status_date": "2026-10-13",
+      "public_summary": {
+        "en": "The erratum gives a counterexample: the omitted diagonal of G-I contains w[a]-1, and the claimed lower bound fails for a sufficiently narrow Fourier bump.",
+        "fr": "L’erratum donne un contre-exemple : la diagonale omise de G-I contient w[a]-1 et la borne annoncée échoue pour une bosse de Fourier suffisamment étroite."
+      },
+      "entry_mode": "C",
+      "priority_status": "not_assessed",
+      "external_review_status": "not_attested",
+      "evidence_ids": [
+        "ERRATUM-20261013"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "RH-T3-NORMALIZATION",
+      "statement": {
+        "en": "T3 fixed-bump construction has unit norm for all large T",
+        "fr": "La construction T3 à bosse fixe est de norme unité pour tout T assez grand"
+      },
+      "proof_status": "refuted_as_stated",
+      "status_date": "2026-10-13",
+      "public_summary": {
+        "en": "The erratum computes the squared Fourier norm as ||b||²/(2 sqrt(T)), which tends to zero and contradicts the asserted unit normalization.",
+        "fr": "L’erratum calcule la norme de Fourier au carré comme ||b||²/(2 sqrt(T)), qui tend vers zéro et contredit la normalisation unité annoncée."
+      },
+      "entry_mode": "C",
+      "priority_status": "not_assessed",
+      "external_review_status": "not_attested",
+      "evidence_ids": [
+        "ERRATUM-20261013"
+      ],
+      "depends_on": []
+    }
+  ]
+}
