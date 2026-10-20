@@ -1,51 +1,30 @@
-> **Historical research archive — status clarification, 1 October 2026.** The T1′–T4 chain does not establish the Riemann hypothesis. Earlier “complete proof framework”, “Proof Article” and “journal-ready” descriptions below are preserved as historical wording and are superseded as current scientific status. Conditional or unsupported steps must not be presented as a completed proof. The historical DOI 10.5281/zenodo.18802769 identifies the earlier archive, not a newly validated result. See [CURRENT_STATUS.md](CURRENT_STATUS.md) and the [current bounded publications](https://www.couretunification.fr/publications-et-depots/).
+# T1′–T4 historical archive
 
-# A Modular Analytic Framework for the Riemann Hypothesis — Proof-only package (T2, T3, Appendix)
+> **WITHDRAWN AS PROOF — 2026-10-13.** The historical T1′–T4 argument is invalid as a proof of the Riemann hypothesis. T2 omits nonzero Gram-matrix diagonal terms; T3 asserts an incompatible wave-packet normalization. [Erratum](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md).
 
-**InterIA Mathematical Collective.**
+## Current scientific status
 
-**Date:** 2026-02-27
+The register below records each status and its evidence. Each statement retains its own verification scope.
 
-**Status.** Proof-only LaTeX source;
-this arXiv package ships fully detailed proofs for:
+- [CURRENT_STATUS.md](CURRENT_STATUS.md)
+- [governance/claims.json](governance/claims.json)
+- [Local erratum copy](governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md)
 
-- **T2** — weighted frame bound (spectral Gershgorin/Schur, different-prime refinement),
-- **T3** — wave–packet localization (DCT, control of square terms),
-- **Appendix** — explicit formula and technical background.
+## Historical documents
 
-The global framework is formulated in four blocks (T1′–T4), but this arXiv v1 bundle
-only includes full proofs for T2, T3, and the appendix. No claim is made here
-about a complete proof of RH, nor about a fully proved T4 block.
+Earlier texts remain available at their historical commit. Their titles and conclusions record the earlier state and must be read with this withdrawal.
 
-**Claim.** RH remains open. This package provides the analytic framework and proved bounds; it does not claim a resolution of RH.
+- [Archive v1.0.0](https://github.com/couret-interia/rh-analytic-framework-t1t4/tree/2ce7cca9b79c537a1893ee316ccf5c7be6af8912)
+- [DOI historique / Historical DOI](https://doi.org/10.5281/zenodo.18802769)
+- [Galerie historique / Historical gallery](https://couret-interia.github.io/rh-analytic-framework-t1t4/#gallery)
 
-## Contents (proof-only)
-
-- `main_arxiv.tex` (entry file)
-- `proofarticle.cls` (journal-ready class; macros included)
-- `theorems/T2_weighted_frame_full.tex`
-- `theorems/T3_wavepacket_full.tex`
-- `appendix/explicit_arch_full.tex`
-- `refs.bib`
-- `MANIFEST_SHA256.txt` (integrity, optional)
-
-## Build (arXiv-compatible)
-
-We target TeX Live (arXiv) with pdfLaTeX (no images needed).
+## Reproduction
 
 ```bash
-pdflatex -halt-on-error -interaction=nonstopmode main_arxiv.tex
-bibtex   main_arxiv
-pdflatex -halt-on-error -interaction=nonstopmode main_arxiv.tex
-pdflatex -halt-on-error -interaction=nonstopmode main_arxiv.tex
-````
+python3 scripts/status_manifest.py --check
+python3 -m unittest discover -s tests -v
+```
 
-## Notes
+These commands check documentary consistency and source digests. They do not constitute mathematical review or an audit of prior art.
 
-- The class `proofarticle.cls` bundles only standard packages used by arXiv.
-- No shell-escape; no external graphics required for the proof-only build.
-- Encoding is UTF-8; T1 font encoding is set in the class.
-
-## License
-
-MIT (see `LICENSE`).
+[English](README.md) · [Français](README_FR.md) · [Maintenance](governance/README.md)

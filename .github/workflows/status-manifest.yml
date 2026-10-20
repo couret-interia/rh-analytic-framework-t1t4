@@ -1,0 +1,19 @@
+name: Public status consistency
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  status-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check generated surfaces and evidence
+        run: python3 scripts/status_manifest.py --check
+      - name: Exercise rejection paths
+        run: python3 -m unittest discover -s tests -v

@@ -1,13 +1,21 @@
-# Current status / Statut actuel
+# Current scientific status and evidence
 
-> **Historical research archive — status clarification, 1 October 2026.** The T1′–T4 chain does not establish the Riemann hypothesis. Earlier “complete proof framework”, “Proof Article” and “journal-ready” descriptions below are preserved as historical wording and are superseded as current scientific status. Conditional or unsupported steps must not be presented as a completed proof. The historical DOI 10.5281/zenodo.18802769 identifies the earlier archive, not a newly validated result. See [CURRENT_STATUS.md](CURRENT_STATUS.md) and the [current bounded publications](https://www.couretunification.fr/publications-et-depots/).
+**WITHDRAWN AS PROOF — 2026-10-13.** The historical T1′–T4 argument is invalid as a proof of the Riemann hypothesis. T2 omits nonzero Gram-matrix diagonal terms; T3 asserts an incompatible wave-packet normalization. [Erratum](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md).
 
-> **Archive historique de recherche — clarification du 1er octobre 2026.** La chaîne T1′–T4 n’établit pas l’hypothèse de Riemann. Les anciennes qualifications de « démonstration complète », « Proof Article » et « journal-ready » conservées ci-dessous sont supersédées comme statut scientifique actuel. Le DOI historique 10.5281/zenodo.18802769 identifie l’archive antérieure, sans nouvelle validation du résultat. Voir [CURRENT_STATUS.md](CURRENT_STATUS.md) et les [publications actuelles à portée bornée](https://www.couretunification.fr/publications-et-depots/).
+**RETIRÉ COMME PREUVE — 2026-10-13.** L’argument historique T1′–T4 est invalidé comme preuve de l’hypothèse de Riemann. T2 omet des termes diagonaux non nuls de la matrice de Gram ; T3 affirme une normalisation incompatible du paquet d’ondes. [Erratum scientifique](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md).
 
-## Publications de référence
+| Claim | Status | Evidence |
+|---|---|---|
+| RH-T1T4: The historical T1′–T4 chain establishes the Riemann hypothesis | WITHDRAWN AS PROOF | [ERRATUM-20261013](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md) |
+| RH-T2-LOWER-BOUND: T2 lower Gram-matrix bound as published | REFUTED AS STATED | [ERRATUM-20261013](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md) |
+| RH-T3-NORMALIZATION: T3 fixed-bump construction has unit norm for all large T | REFUTED AS STATED | [ERRATUM-20261013](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md) |
 
-- [Couret — finite verifications](https://github.com/alexcour/couret-finite-verifications) — v1.0.0 ; DOI [10.5281/zenodo.22978365](https://doi.org/10.5281/zenodo.22978365) ; [HAL](https://hal.science/hal-05766909).
-- [HOL-01: Exact finite monodromy certificate at p=7 for a Barning-Berggren congruence graph](https://github.com/alexcour/hol01-monodromy-p7) — v1.1.1 ; DOI [10.5281/zenodo.22978389](https://doi.org/10.5281/zenodo.22978389) ; [HAL](https://hal.science/hal-05766912).
-- [Qui répond des mathématiques produites par machine ? — public reproducibility package](https://github.com/alexcour/qui-repond-mathematiques-ia) — v1.1.0 ; DOI [10.5281/zenodo.23079572](https://doi.org/10.5281/zenodo.23079572) ; [HAL](https://hal.science/hal-05773424).
+## Scope
 
-Les tags, DOI, sources et licences historiques restent conservés. Ce raccord documentaire n’établit aucune nouveauté ou validation externe. L’archivage administratif de ce dépôt, le cas échéant, doit intervenir après la correction des surfaces publiques.
+Pilot scope: the historical T1′–T4 proof chain and the T2/T3 errors documented on 13 October 2026. No status is assigned here to STROBO, Cayley or other branches.
+
+This is a documentary withdrawal register. Its evidence is a source document; no independent mathematical replay, external review or novelty assessment is implied. The legacy DOI identifies the historical archive. Existing PDF files, tags and releases remain historical and are not certified by this status check.
+
+## Generated surfaces
+
+The five root README files, this page, `index.html` and `governance/generated/zenodo-description.html` derive from `governance/claims.json`. The repository's `zenodo.json` description is checked against that same export. The live Zenodo record and the main WordPress site still require separate application and verification. A passing check does not assert that either was updated.

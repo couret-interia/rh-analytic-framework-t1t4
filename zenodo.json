@@ -3,10 +3,14 @@
   "access_right": "open",
   "upload_type": "publication",
   "publication_type": "report",
-  "description": "Journal-ready reproducible LaTeX framework (proof-only, T1′–T4 analytic scheme): T2/T3 detailed proofs, Guinand–Weil explicit formula, Archimedean bounds, CI/Makefile, guides, arXiv tarball.",
+  "description": "<p><strong>WITHDRAWN AS PROOF — 2026-10-13.</strong> The historical T1′–T4 argument is invalid as a proof of the Riemann hypothesis. T2 omits nonzero Gram-matrix diagonal terms; T3 asserts an incompatible wave-packet normalization. <a href=\"https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md\">Scientific erratum</a>.</p>\n<p lang=\"fr\"><strong>RETIRÉ COMME PREUVE.</strong> L’argument historique T1′–T4 est invalidé comme preuve de l’hypothèse de Riemann. T2 omet des termes diagonaux non nuls de la matrice de Gram ; T3 affirme une normalisation incompatible du paquet d’ondes.</p>\n<p>This DOI identifies the historical T1′–T4 archive. The source documents are preserved for provenance. The withdrawal does not certify unrelated finite computations, independent review or mathematical priority.</p>\n",
   "creators": [
-    { "name": "Alexandre Couret" },
-    { "name": "InterIA Mathematical Collective" }
+    {
+      "name": "Alexandre Couret"
+    },
+    {
+      "name": "InterIA Mathematical Collective"
+    }
   ],
   "publication_date": "2026-02-27",
   "version": "1.0.0",
