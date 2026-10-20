@@ -1,3 +1,23 @@
+## Historical T1′–T4 archive
+
+<!-- BEGIN GENERATED SCIENTIFIC STATUS -->
+
+Status: **RETRACTED AS PROOF — 2026-10-20**
+
+RETRACTED AS PROOF. The historical T1′–T4 argument is invalidated, following the erratum of 13 October 2026. T2 drops the nonunit diagonal of the Gram matrix; T3 uses an incompatible wave-packet normalization. This archive does not prove the Riemann hypothesis. Its historical files and identifiers remain available for examination of the errors.
+
+[Erratum du 13 octobre 2026](https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md) · [État courant](CURRENT_STATUS.md) · [Registre de statut](governance/claims.json)
+
+<!-- END GENERATED SCIENTIFIC STATUS -->
+
+## Historical record / Texte historique
+
+The following text is retained as historical material under the withdrawal above. It is not the current scientific status. The exact original is available at [commit 2ce7cca9](https://github.com/couret-interia/rh-analytic-framework-t1t4/blob/2ce7cca9b79c537a1893ee316ccf5c7be6af8912/RELEASE_NOTES_TEMPLATE.md).
+
+<details>
+<summary>Read the withdrawn historical text / Lire le texte historique retiré</summary>
+
+<!-- BEGIN WITHDRAWN HISTORICAL CONTENT -->
 > **“From analysis to clarity: a proof of the framework — not of Riemann, but of rigor itself.”**
 
 # InterIA — Analytic Framework (T1′–T4) {{VERSION}}
@@ -130,3 +150,6 @@ Bridging analytic structure and reproducible practice.
 Relier structure analytique et pratiques reproductibles.
 
 ---
+<!-- END WITHDRAWN HISTORICAL CONTENT -->
+
+</details>

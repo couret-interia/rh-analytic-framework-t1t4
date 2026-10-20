@@ -3,6 +3,7 @@ set -euo pipefail
 
 BUNDLE="couret-interia_rh-analytic-framework-t1t4-v1.0.0FINAL_bundle.zip"
 ROOT="$(pwd)"
+python3 scripts/status_manifest.py --check --release
 
 need() {
   local miss=0
@@ -46,7 +47,9 @@ rsync -a --delete \
   "$TMP/proof-article/" 2>/dev/null || true
 
 echo "▶️  Root files"
-cp -a ABOUT_INTERIA.md CITATION.cff LICENSE "$TMP/"
+cp -a ABOUT_INTERIA.md CITATION.cff LICENSE CURRENT_STATUS.md ERRATUM_RH_T1T4_2026-10-13.md F001_ERRATUM.md HISTORICAL_DOCUMENTS.md "$TMP/"
+cp -a governance "$TMP/"
+cp -a 05-chebyshev-mod30 "$TMP/"
 
 # -- Générer release notes du template
 echo "▶️  RELEASE_NOTES_v1.0.0"
@@ -93,6 +96,8 @@ echo "▶️  Zip → $BUNDLE"
   zip -qr "../$BUNDLE" \
     proof-article dist \
     index.html ABOUT_INTERIA.md RELEASE_NOTES_v1.0.0.md CITATION.cff LICENSE \
+    CURRENT_STATUS.md ERRATUM_RH_T1T4_2026-10-13.md F001_ERRATUM.md HISTORICAL_DOCUMENTS.md \
+    governance 05-chebyshev-mod30 \
     MANIFEST_SHA256.txt
 )
 mv "$TMP/../$BUNDLE" "$ROOT/$BUNDLE"

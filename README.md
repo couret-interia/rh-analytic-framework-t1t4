@@ -9,12 +9,14 @@ The register below records each status and its evidence. Each statement retains 
 - [CURRENT_STATUS.md](CURRENT_STATUS.md)
 - [governance/claims.json](governance/claims.json)
 - [Local erratum copy](governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md)
+- [F-001](F001_ERRATUM.md)
 
 ## Historical documents
 
 Earlier texts remain available at their historical commit. Their titles and conclusions record the earlier state and must be read with this withdrawal.
 
 - [Archive v1.0.0](https://github.com/couret-interia/rh-analytic-framework-t1t4/tree/2ce7cca9b79c537a1893ee316ccf5c7be6af8912)
+- [Copies avec notice / Copies with notices](HISTORICAL_DOCUMENTS.md)
 - [DOI historique / Historical DOI](https://doi.org/10.5281/zenodo.18802769)
 - [Galerie historique / Historical gallery](https://couret-interia.github.io/rh-analytic-framework-t1t4/#gallery)
 
