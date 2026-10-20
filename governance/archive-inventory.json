@@ -10,15 +10,15 @@
     },
     {
       "path": "ABOUT_INTERIA.md",
-      "sha256": "83119bb38fd66298e24f8ed6769b83e637eabed9dfb1ccdb047cc90296810c71"
+      "sha256": "789ea79b3f16743468ab5c40364f4ed7b0821bc26fe43d9c3061621df3b9aa71"
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ff7f2c2871711abc9031943d3e1d1eae8fed9974a8edd6a2bac7f58054bd1bdb"
+      "sha256": "0c1f9cda40a12383731ee947d2aee30f2ef1df1bea2b672eadb5da35951833c1"
     },
     {
       "path": "CHANGELOG_FR.md",
-      "sha256": "78d594b27f978e1ce1a3c580c0f089bfbf60a8a1a3cb1479faaa8f8dd8a94acd"
+      "sha256": "30cd81b820dde60c9bb73446619ea9bae4e76f1819097723f3aa8149e788c088"
     },
     {
       "path": "ERRATUM_RH_T1T4_2026-10-13.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "RELEASE_NOTES_TEMPLATE.md",
-      "sha256": "cec58050741ea500a94e1f4328f156cf614ca0a77f3e5f618a74b8ece01efe7f"
+      "sha256": "732d16dc514f0b756b51c40f1e30ebd2f62733d89f50a79839ca578b3fa32233"
     },
     {
       "path": "audit/pdf-withdrawal-20261020.json",

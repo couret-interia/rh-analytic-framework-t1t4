@@ -1,8 +1,8 @@
-# Historical T1′–T4 archive
+## Historical T1′–T4 archive
 
 <!-- BEGIN GENERATED SCIENTIFIC STATUS -->
 
-**RETRACTED AS PROOF — 2026-10-20**
+Status: **RETRACTED AS PROOF — 2026-10-20**
 
 RETRACTED AS PROOF. The historical T1′–T4 argument is invalidated, following the erratum of 13 October 2026. T2 drops the nonunit diagonal of the Gram matrix; T3 uses an incompatible wave-packet normalization. This archive does not prove the Riemann hypothesis. Its historical files and identifiers remain available for examination of the errors.
 

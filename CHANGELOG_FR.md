@@ -1,8 +1,8 @@
-# Archive historique T1′–T4
+## Archive historique T1′–T4
 
 <!-- BEGIN GENERATED SCIENTIFIC STATUS -->
 
-**RETRACTED AS PROOF — 2026-10-20**
+Status: **RETRACTED AS PROOF — 2026-10-20**
 
 RETRACTED AS PROOF / ARGUMENT INVALIDÉ. La chaîne historique T1′–T4 est retirée comme démonstration, conformément à l’erratum du 13 octobre 2026. T2 omet la diagonale non unitaire de la matrice de Gram ; T3 emploie une normalisation incompatible du paquet d’ondes. Cette archive ne démontre pas l’hypothèse de Riemann. Les fichiers et identifiants historiques restent disponibles pour examiner les erreurs.
 
