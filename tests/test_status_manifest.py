@@ -19,6 +19,13 @@ class StatusManifestTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.data = status.load_registry(ROOT)
+        inventory_path = self.data["archive_integrity"]["path"]
+        inventory = json.loads((ROOT / inventory_path).read_text())
+        for name in [inventory_path, "manifest.json", "CITATION.cff",
+                     *(entry["path"] for entry in inventory["files"])]:
+            target = self.root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / name, target)
         for evidence in self.data["evidence"]:
             target = self.root / evidence["local_path"]
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -142,6 +149,84 @@ class StatusManifestTests(unittest.TestCase):
         self.assertEqual(status.check_surfaces(self.root, self.data, status.rendered(self.data)), [])
         with self.assertRaisesRegex(status.RegistryError, "proof release blocked"):
             status.check_release(self.data)
+
+    def test_pdf_without_notice_cannot_replace_annotated_copy(self):
+        path = self.root / "main_arxiv.pdf"
+        path.write_bytes(b"%PDF-1.4 historical file without notice")
+        errors = status.check_surfaces(self.root, self.data, status.rendered(self.data))
+        self.assertTrue(any("main_arxiv.pdf" in error for error in errors))
+
+    def test_missing_pdf_is_rejected(self):
+        (self.root / "docs/demo_T1p_T4_EN.pdf").unlink()
+        self.assertTrue(status.check_archive(self.root, self.data))
+
+    def test_archive_inventory_cannot_be_silently_rewritten(self):
+        (self.root / self.data["archive_integrity"]["path"]).write_text('{}')
+        self.assertTrue(any("inventory digest mismatch" in error
+                            for error in status.check_archive(self.root, self.data)))
+
+    def test_f001_source_change_is_rejected(self):
+        (self.root / "F001_ERRATUM.md").write_text('changed')
+        with self.assertRaisesRegex(status.RegistryError, "digest mismatch"):
+            status.validate(self.data, self.root)
+
+    def test_secondary_metadata_cannot_reintroduce_proof_wording(self):
+        for name in ["manifest.json", "CITATION.cff"]:
+            with self.subTest(path=name):
+                path = self.root / name
+                original = path.read_bytes()
+                if name.endswith('.json'):
+                    data = json.loads(path.read_text())
+                    data['description'] = 'Proof-only journal-ready framework'
+                    path.write_text(json.dumps(data))
+                else:
+                    path.write_text(path.read_text().replace('WITHDRAWN AS PROOF', 'PROVED'))
+                self.assertTrue(any(name in error for error in status.check_surfaces(
+                    self.root, self.data, status.rendered(self.data))))
+                path.write_bytes(original)
+
+    def test_historical_text_is_checked_even_if_output_digest_is_updated(self):
+        name = 'theorems/T2_weighted_frame_full.tex'
+        path = self.root / name
+        path.write_text(path.read_text() + '\nChanged mathematical assertion.\n')
+        self.refresh_inventory_digest(name)
+        self.assertTrue(any('historical theorem changed' in error
+                            for error in status.check_archive(self.root, self.data)))
+
+    def test_actions_cannot_revert_to_a_moving_tag(self):
+        name = '.github/workflows/status-manifest.yml'
+        path = self.root / name
+        path.write_text(path.read_text().replace(
+            'actions/checkout@11d5960a326750d5838078e36cf38b85af677262', 'actions/checkout@v4'))
+        self.refresh_inventory_digest(name)
+        self.assertTrue(any('unpinned action' in error
+                            for error in status.check_archive(self.root, self.data)))
+
+    def test_tex_rebuild_cannot_drop_opening_notice(self):
+        name = 'main_arxiv.tex'
+        path = self.root / name
+        path.write_text(path.read_text().replace('\\input{retraction_notice.tex}', ''))
+        self.refresh_inventory_digest(name)
+        self.assertTrue(any('opening LaTeX notice missing' in error
+                            for error in status.check_archive(self.root, self.data)))
+
+    def test_historical_markdown_body_is_preserved(self):
+        name = 'ABOUT_INTERIA.md'
+        path = self.root / name
+        path.write_text(path.read_text().replace('<!-- END WITHDRAWN HISTORICAL CONTENT -->',
+                                               'Changed history.\n<!-- END WITHDRAWN HISTORICAL CONTENT -->'))
+        self.refresh_inventory_digest(name)
+        self.assertTrue(any('historical quotation changed' in error
+                            for error in status.check_archive(self.root, self.data)))
+
+    def refresh_inventory_digest(self, name):
+        path = self.root / self.data['archive_integrity']['path']
+        data = json.loads(path.read_text())
+        for item in data['files']:
+            if item['path'] == name:
+                item['sha256'] = hashlib.sha256((self.root / name).read_bytes()).hexdigest()
+        path.write_text(json.dumps(data))
+        self.data['archive_integrity']['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 if __name__ == "__main__":

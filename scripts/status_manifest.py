@@ -26,6 +26,7 @@ READMES = {
 }
 STATUSES = {
     "withdrawn_as_proof": ("WITHDRAWN AS PROOF", "RETIRÉ COMME PREUVE"),
+    "withdrawn_empirical_claim": ("WITHDRAWN EMPIRICAL CLAIM", "REVENDICATION EMPIRIQUE RETIRÉE"),
     "refuted_as_stated": ("REFUTED AS STATED", "RÉFUTÉ TEL QU’ÉNONCÉ"),
     "unverified": ("UNVERIFIED", "NON VÉRIFIÉ"),
     "observed": ("BOUNDED OBSERVATION", "OBSERVATION BORNÉE"),
@@ -203,6 +204,7 @@ def readme(data, lang):
     text += "- [governance/claims.json](governance/claims.json)\n"
     text += ("- [Copie de l’erratum](governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md)\n"
              if fr else "- [Local erratum copy](governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md)\n")
+    text += "- [F-001](F001_ERRATUM.md)\n"
     text += f"\n## {'Documents historiques' if fr else 'Historical documents'}\n\n"
     text += ("Les textes antérieurs restent accessibles à leur commit historique. "
              "Leurs titres et conclusions sont ceux de l’époque et sont accompagnés du présent retrait.\n\n"
@@ -210,6 +212,7 @@ def readme(data, lang):
              "Earlier texts remain available at their historical commit. Their titles and conclusions "
              "record the earlier state and must be read with this withdrawal.\n\n")
     text += f"- [Archive {data['archive']['version']}]({archive_url(data)})\n"
+    text += "- [Copies avec notice / Copies with notices](HISTORICAL_DOCUMENTS.md)\n"
     text += f"- [DOI historique / Historical DOI](https://doi.org/{data['archive']['doi']})\n"
     text += "- [Galerie historique / Historical gallery](https://couret-interia.github.io/rh-analytic-framework-t1t4/#gallery)\n"
     text += "\n## Reproduction\n\n```bash\npython3 scripts/status_manifest.py --check\npython3 -m unittest discover -s tests -v\n```\n\n"
@@ -234,12 +237,15 @@ def current_status(data):
     text += ("\n## Scope\n\n" + data["coverage"] + "\n\n"
              "This is a documentary withdrawal register. Its evidence is a source document; "
              "no independent mathematical replay, external review or novelty assessment is implied. "
-             "The legacy DOI identifies the historical archive. Existing PDF files, tags and releases "
-             "remain historical and are not certified by this status check.\n\n"
+             "The legacy DOI identifies the historical archive. The 15 current PDF copies carry "
+             "an opening withdrawal notice; their 64 historical pages are retained. "
+             "These annotated copies were not recompiled from the edited LaTeX sources. "
+             "Original versions remain pinned at the historical commit. Existing tags, releases "
+             "and the live Zenodo files are separate historical publications.\n\n"
              "## Generated surfaces\n\n"
              "The five root README files, this page, `index.html` and "
              "`governance/generated/zenodo-description.html` derive from `governance/claims.json`. "
-             "The repository's `zenodo.json` description is checked against that same export. "
+             "The local metadata and the archive inventory are checked against this register. "
              "The live Zenodo record and the main WordPress site still require separate application "
              "and verification. A passing check does not assert that either was updated.\n")
     return text
@@ -266,7 +272,9 @@ def gallery(data):
     text += ("<h2 id=\"gallery\">Historical documents</h2>\n"
              "<p>The linked versions preserve the earlier record. Their arguments and any claims "
              "of a completed proof must be read with the withdrawal above. "
-             "The existing PDFs have not been regenerated or independently verified.</p>\n<ul>\n")
+             "The 15 current PDF copies have an opening notice; their historical content is preserved. "
+             "This editorial annotation is not mathematical validation. "
+             '<a href="HISTORICAL_DOCUMENTS.md">Copies, counts and pinned originals</a>.</p>\n<ul>\n')
     base = archive_url(data).replace("/tree/", "/blob/")
     for path, title in [
         ("src/main_journal.pdf", "Historical journal, English"),
@@ -274,7 +282,8 @@ def gallery(data):
         ("theorems/T2_weighted_frame_full.tex", "T2 source, invalid argument as written"),
         ("theorems/T3_wavepacket_full.tex", "T3 source, incompatible normalization"),
     ]:
-        text += f'<li><a href="{base}/{path}">{title}</a></li>\n'
+        text += (f'<li><a href="{path}">{title}, annotated copy</a> '
+                 f'(<a href="{base}/{path}">pinned original</a>)</li>\n')
     text += ("</ul>\n<p><a href=\"https://github.com/" + data["archive"]["repository"]
              + "/blob/main/CURRENT_STATUS.md\">Current status and evidence</a></p>\n"
              "</main>\n<footer>Historical archive, MIT licence.</footer>\n</body>\n</html>\n")
@@ -298,6 +307,58 @@ def normalized(text):
     return text.translate(str.maketrans({c: "-" for c in "‐‑‒–—−"}))
 
 
+def metadata_fields(data):
+    title = "WITHDRAWN AS PROOF — Historical T1′–T4 analytic framework"
+    description = rendered(data)["governance/generated/zenodo-description.html"]
+    return {
+        "zenodo.json": {"title": title, "description": description},
+        "manifest.json": {"description": description},
+        "CITATION.cff": {"title": title,
+                         "message": "Cite this only as a historical archive withdrawn as a proof argument; include the erratum of 13 October 2026."},
+    }
+
+
+def check_archive(root, data):
+    errors = []
+    try:
+        spec = data["archive_integrity"]
+        inventory_path = local_path(root, spec["path"])
+        require(sha256(inventory_path) == spec["sha256"], "archive inventory digest mismatch")
+        inventory = json.loads(inventory_path.read_text(encoding="utf-8"), object_pairs_hook=unique_keys)
+        require(inventory["historical_commit"] == data["archive"]["source_commit"],
+                "archive inventory identifies another historical commit")
+        names = [entry["path"] for entry in inventory["files"]]
+        require(len(names) == len(set(names)), "duplicate archive file")
+        for entry in inventory["files"]:
+            target = local_path(root, entry["path"])
+            require(target.is_file() and sha256(target) == entry["sha256"],
+                    f"archive file missing or modified: {entry['path']}")
+        for entry in inventory["historical_markdown"]:
+            text = local_path(root, entry["path"]).read_text(encoding="utf-8")
+            start, end = "<!-- BEGIN WITHDRAWN HISTORICAL CONTENT -->\n", "<!-- END WITHDRAWN HISTORICAL CONTENT -->"
+            require(text.count(start) == text.count(end) == 1, f"historical quotation missing: {entry['path']}")
+            historical = text.split(start, 1)[1].split(end, 1)[0]
+            require(hashlib.sha256(historical.encode()).hexdigest() == entry["historical_sha256"],
+                    f"historical quotation changed: {entry['path']}")
+        for entry in inventory["theorem_sources"]:
+            text = local_path(root, entry["path"]).read_text(encoding="utf-8")
+            marker = "% END RETRACTION NOTICE\n"
+            require(text.count(marker) == 1, f"theorem notice missing: {entry['path']}")
+            require(hashlib.sha256(text.split(marker, 1)[1].encode()).hexdigest() == entry["historical_sha256"],
+                    f"historical theorem changed: {entry['path']}")
+        for name in inventory["tex_documents"]:
+            text = local_path(root, name).read_text(encoding="utf-8")
+            require("\\begin{document}\n\\input{retraction_notice.tex}" in text,
+                    f"opening LaTeX notice missing: {name}")
+        for path in (root / ".github/workflows").glob("*.y*ml"):
+            for action in re.findall(r"uses:\s+([^\s#]+)", path.read_text(encoding="utf-8")):
+                require(action.startswith("./") or re.fullmatch(r"[^@\s]+@[0-9a-f]{40}", action),
+                        f"unpinned action: {path.name}: {action}")
+    except (RegistryError, KeyError, TypeError, OSError, ValueError) as error:
+        errors.append(str(error))
+    return errors
+
+
 def check_surfaces(root, data, outputs):
     errors = []
     for path, expected in outputs.items():
@@ -311,6 +372,21 @@ def check_surfaces(root, data, outputs):
     description = outputs["governance/generated/zenodo-description.html"]
     if metadata.get("description") != description:
         errors.append("zenodo.json description differs from the register; run --write")
+    for name, fields in metadata_fields(data).items():
+        try:
+            text = local_path(root, name).read_text(encoding="utf-8")
+            if name.endswith(".json"):
+                actual = json.loads(text, object_pairs_hook=unique_keys)
+                for field, wanted in fields.items():
+                    if actual.get(field) != wanted:
+                        errors.append(f"{name}: metadata drift: {field}")
+            else:
+                for field, wanted in fields.items():
+                    if f"{field}: {json.dumps(wanted, ensure_ascii=False)}" not in text.splitlines():
+                        errors.append(f"{name}: metadata drift: {field}")
+        except (OSError, ValueError) as error:
+            errors.append(f"{name}: {error}")
+    errors.extend(check_archive(root, data))
     if any(c["proof_status"] != "proved" for c in data["claims"]):
         for path in [*outputs, "zenodo.json"]:
             target = local_path(root, path)
@@ -339,10 +415,18 @@ def main(argv=None):
                 target = local_path(ROOT, path)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(content, encoding="utf-8")
-            metadata_path = ROOT / "zenodo.json"
-            metadata = json.loads(metadata_path.read_text(encoding="utf-8"), object_pairs_hook=unique_keys)
-            metadata["description"] = outputs["governance/generated/zenodo-description.html"]
-            metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            for name, fields in metadata_fields(data).items():
+                path = ROOT / name
+                text = path.read_text(encoding="utf-8")
+                if name.endswith(".json"):
+                    metadata = json.loads(text, object_pairs_hook=unique_keys)
+                    metadata.update(fields)
+                    text = json.dumps(metadata, ensure_ascii=False, indent=2) + "\n"
+                else:
+                    for field, wanted in fields.items():
+                        line = f"{field}: {json.dumps(wanted, ensure_ascii=False)}"
+                        text = re.sub(rf"^{re.escape(field)}:.*$", lambda _: line, text, flags=re.M)
+                path.write_text(text, encoding="utf-8")
         errors = check_surfaces(ROOT, data, outputs)
         require(not errors, "\n".join(errors))
         if args.release:

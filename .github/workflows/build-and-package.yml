@@ -12,7 +12,7 @@ jobs:
       contents: write    # nécessaire pour créer une Release
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Require a reviewed publication decision
         run: python3 scripts/status_manifest.py --check --release
@@ -104,14 +104,14 @@ jobs:
 
       # Artefacts “Actions” (optionnel, utile pour test sans release)
       - name: Upload artifact — All-docs (tagged)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: All-docs-Riemann-Hypothesis-T1p-T4_interIA-${{ steps.rel.outputs.tag }}.zip
           path: ${{ steps.files.outputs.ALLDOCS }}
           retention-days: 60
 
       - name: Upload artifact — FINAL bundle (tagged)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: couret-interia_rh-analytic-framework-t1t4-${{ steps.rel.outputs.tag }}_FINAL_bundle.zip
           path: ${{ steps.files.outputs.FINAL }}
@@ -131,7 +131,7 @@ jobs:
       # Création de la Release + assets (automatique sur push de tag)
       - name: Create GitHub Release & upload assets
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # v2
         with:
           tag_name: ${{ steps.rel.outputs.tag }}
           name:     InterIA — Analytic Framework (T1′–T4) ${{ steps.rel.outputs.tag }}

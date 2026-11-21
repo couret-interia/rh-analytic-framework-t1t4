@@ -1,15 +1,27 @@
 {
   "name": "rh-analytic-framework-t1t4",
   "version": "v1.0.0",
-  "description": "Proof-only LaTeX source (T1′–T4 framework).",
-  "arxiv": { "primary": "math.NT", "secondary": "math.CA" },
+  "description": "<p><strong>WITHDRAWN AS PROOF — 2026-10-13.</strong> The historical T1′–T4 argument is invalid as a proof of the Riemann hypothesis. T2 omits nonzero Gram-matrix diagonal terms; T3 asserts an incompatible wave-packet normalization. <a href=\"https://github.com/alexcour/couret-finite-verifications/blob/5bfca060ce3a4ed5687bd80d0cccab73767074b3/ERRATUM_RH_T1T4_2026-10-13.md\">Scientific erratum</a>.</p>\n<p lang=\"fr\"><strong>RETIRÉ COMME PREUVE.</strong> L’argument historique T1′–T4 est invalidé comme preuve de l’hypothèse de Riemann. T2 omet des termes diagonaux non nuls de la matrice de Gram ; T3 affirme une normalisation incompatible du paquet d’ondes.</p>\n<p>This DOI identifies the historical T1′–T4 archive. The source documents are preserved for provenance. The withdrawal does not certify unrelated finite computations, independent review or mathematical priority.</p>\n",
+  "arxiv": {
+    "primary": "math.NT",
+    "secondary": "math.CA"
+  },
   "files": [
     "main_arxiv.tex",
     "proofarticle.cls",
     "theorems/T2_weighted_frame_full.tex",
     "theorems/T3_wavepacket_full.tex",
     "appendix/explicit_arch_full.tex",
-    "refs.bib"
+    "refs.bib",
+    "retraction_notice.tex",
+    "CURRENT_STATUS.md",
+    "ERRATUM_RH_T1T4_2026-10-13.md",
+    "authors_cmd.tex",
+    "F001_ERRATUM.md",
+    "HISTORICAL_DOCUMENTS.md",
+    "05-chebyshev-mod30/README.md",
+    "governance/claims.json",
+    "governance/evidence/ERRATUM_RH_T1T4_2026-10-13.md"
   ],
   "integrity": {
     "manifest": "MANIFEST_SHA256.txt",
